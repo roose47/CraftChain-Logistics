@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>This is my home</h1>
+        <p>The name is {{ name }}</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Orders</th>
+                    <th>Action</th> <!-- Added a header for the action column -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td><a href="{% url 'customer' order.id %}">{{ order.name }}</a></td>
+                    <!-- Added Bootstrap classes for styling the delete button -->
+                    <td><a href="{% url 'order' order.id %}" class="btn btn-danger text-white">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'Customer_req' %} "class="btn btn-primary text-white">Enter Info</a>
+    </div>
+
+{% endblock content %}

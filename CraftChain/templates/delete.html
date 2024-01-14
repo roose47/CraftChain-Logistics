@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="ml-5 mt-5">
+    <p class="lead">Are you sure you want to delete?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <a href="{% url 'home' %}" class="btn btn-secondary mr-3">Cancel</a>
+        <button type="submit" class="btn btn-danger" name="Confirm">Confirm</button>
+    </form>
+</div>
+{% endblock content %}
