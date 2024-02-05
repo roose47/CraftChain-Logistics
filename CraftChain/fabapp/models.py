@@ -25,3 +25,17 @@ class Inventory(models.Model):
 
     def __str__(self):
         return self.material_name
+
+class RawMaterials(models.Model):
+    RAW_MATERIAL_CHOICES = [
+        ('rm1', 'RM1'),
+        ('rm2', 'RM2'),
+        ('rm3', 'RM2'),
+        ('rm4', 'RM4'),
+    ]
+    raw_material_name = models.CharField(max_length=50, null=True, choices=RAW_MATERIAL_CHOICES)
+    raw_material_amt = models.IntegerField()
+
+    def __str__(self):
+        return self.raw_material_name
+    
