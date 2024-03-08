@@ -55,8 +55,8 @@ def add_materials(request):
     return render(request, 'inventory.html', {'choices': choices})
 
 
-def json(request):
+def apitest(request):
     data = list(CustomerRequirements.objects.values())
     data2 = list(Inventory.objects.values())
     big_data = [data,data2]
-    return JsonResponse(big_data, safe=False)
+    return JsonResponse(data, safe=False)
