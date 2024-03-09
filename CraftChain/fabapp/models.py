@@ -1,6 +1,7 @@
 from django.db import models
 # from django.contrib.auth.models import User  # Optional, for user authentication
 from django.utils import timezone
+import uuid
 # Create your models here.
 
 
@@ -32,7 +33,7 @@ class Inventory(models.Model):
 
 class Supplier(models.Model):
     supplier_name = models.CharField(max_length=50, null=True,)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField(max_length=30)
 
     def __str__(self):
@@ -42,8 +43,10 @@ class Supplier(models.Model):
 
 
 class Customer(models.Model):
+    customer_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
     email = models.EmailField()
+    phone = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):
         return self.name
