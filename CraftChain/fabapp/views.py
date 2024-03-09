@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import CustomerRequirements, Inventory
+from .models import CustomerRequirements, Inventory, Customer
 from django.http import JsonResponse
 # Create your views here.
 
@@ -60,3 +60,7 @@ def apitest(request):
     data2 = list(Inventory.objects.values())
     big_data = [data,data2]
     return JsonResponse(data, safe=False)
+
+def list_customers(request):
+    all_customers = list(Customer.objects.values())
+    return JsonResponse(all_customers, safe=False)

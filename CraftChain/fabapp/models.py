@@ -42,42 +42,88 @@ class Supplier(models.Model):
 
 
 
+# class Customer(models.Model):
+#     # customer_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+#     name = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     phone = models.CharField(max_length=15, blank=True, null=True)
+
+#     def __str__(self):
+#         return self.name
+
+# class Invoice(models.Model):
+#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+#     amount = models.DecimalField(max_digits=10, decimal_places=2)
+#     date = models.DateTimeField(auto_now_add=True)
+    
+#     STATUS_CHOICES = (
+#         ('Paid', 'Paid'),
+#         ('Pending', 'Pending'),
+#     )
+#     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+
+#     def __str__(self):
+#         return f"Invoice for {self.customer.name}"
+    
+# class Order(models.Model):
+#     # order_id = models.UUIDField(default=uuid.uuid4, editable = False, unique=True)
+#     order_name = models.CharField(max_length=150)
+#     # customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
+#     order_date = models.DateTimeField(default=timezone.now)
+#     order_location = models.CharField(max_length=150)
+#     order_amount = models.IntegerField()
+#     status_choices = (
+#         ('Delivered', 'Delivered'),
+#         ('In Progress', 'In Progress')
+#     )
+#     order_status = models.CharField(max_length=15, choices = status_choices, default='In Progress')
+
+
+    
+
 class Customer(models.Model):
-    # customer_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-class Invoice(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateTimeField(auto_now_add=True)
-    
-    STATUS_CHOICES = (
-        ('Paid', 'Paid'),
-        ('Pending', 'Pending'),
-    )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
-
-    def __str__(self):
-        return f"Invoice for {self.customer.name}"
-    
 class Order(models.Model):
-    # order_id = models.UUIDField(default=uuid.uuid4, editable = False, unique=True)
-    order_name = models.CharField(max_length=150)
-    # customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    order_date = models.DateTimeField(default=timezone.now)
-    order_location = models.CharField(max_length=150)
-    order_amount = models.IntegerField()
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order_name = models.CharField(max_length=30, null=True)
+    order_id = models.AutoField(primary_key=True)
+    date = models.DateField(auto_now_add=True)
     status_choices = (
-        ('Delivered', 'Delivered'),
+        ('Finished', 'Finished'),
         ('In Progress', 'In Progress')
     )
     order_status = models.CharField(max_length=15, choices = status_choices, default='In Progress')
 
+    def __str__(self):
+        return self.order_name
 
+class Invoice(models.Model):
+
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, primary_key=True)
+    invoice_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    address = models.CharField(max_length=150, null=True)
+    
+    customer_name = models.CharField(max_length=100, blank=True)  # Allow blank since it will be auto-populated
+
+    def save(self, *args, **kwargs):
+        # Automatically fetch the customer name from the associated order
+        self.customer_name = self.order.customer.name
+        super().save(*args, **kwargs)
+
+    status_choices = (
+        ('Paid', 'Paid'),
+        ('Unpaid', 'Unpaid')
+    )
+    order_status = models.CharField(max_length=15, choices = status_choices, default='Unpaid')
+
+    def __str__(self):
+        return f"{self.order.customer.name}"
     
 
+    

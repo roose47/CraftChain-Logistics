@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import CustomerRequirements, Inventory, Supplier,Customer,Invoice, Order
+from .models import CustomerRequirements, Inventory, Supplier,Customer, Order, Invoice
 
 
 class CustomerReqAdmin(admin.ModelAdmin):
@@ -17,9 +17,9 @@ class CustomerAdmin(admin.ModelAdmin):
 
 
 
-class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'amount', 'date','status')
-    readonly_fields = ('date',)
+# class InvoiceAdmin(admin.ModelAdmin):
+#     list_display = ('customer', 'amount', 'date','status')
+#     readonly_fields = ('date',)
 
 
 
@@ -28,4 +28,4 @@ admin.site.register(Inventory)
 admin.site.register(Supplier)
 admin.site.register(Order)
 admin.site.register(Customer)
-admin.site.register(Invoice, InvoiceAdmin)
+admin.site.register(Invoice)
