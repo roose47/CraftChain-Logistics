@@ -43,7 +43,7 @@ class Supplier(models.Model):
 
 
 class Customer(models.Model):
-    customer_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    # customer_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15, blank=True, null=True)
@@ -64,6 +64,20 @@ class Invoice(models.Model):
 
     def __str__(self):
         return f"Invoice for {self.customer.name}"
+    
+class Order(models.Model):
+    # order_id = models.UUIDField(default=uuid.uuid4, editable = False, unique=True)
+    order_name = models.CharField(max_length=150)
+    # customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order_date = models.DateTimeField(default=timezone.now)
+    order_location = models.CharField(max_length=150)
+    order_amount = models.IntegerField()
+    status_choices = (
+        ('Delivered', 'Delivered'),
+        ('In Progress', 'In Progress')
+    )
+    order_status = models.CharField(max_length=15, choices = status_choices, default='In Progress')
+
 
     
 
