@@ -31,15 +31,6 @@ class Inventory(models.Model):
     def __str__(self):
         return self.material_name
 
-class Supplier(models.Model):
-    supplier_name = models.CharField(max_length=50, null=True,)
-    phone = models.CharField(max_length=15, blank=True, null=True)
-    email = models.EmailField(max_length=30)
-
-    def __str__(self):
-        return self.supplier_name
-    
-
 
 
 # class Customer(models.Model):
@@ -108,7 +99,6 @@ class Invoice(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, primary_key=True)
     invoice_amount = models.DecimalField(max_digits=10, decimal_places=2)
     address = models.CharField(max_length=150, null=True)
-    
     customer_name = models.CharField(max_length=100, blank=True)  # Allow blank since it will be auto-populated
 
     def save(self, *args, **kwargs):
@@ -126,4 +116,23 @@ class Invoice(models.Model):
         return f"{self.order.customer.name}"
     
 
+class Supplier(models.Model):
+    supplier_name = models.CharField(max_length=50, null=True,)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(max_length=30)
+    rating = models.CharField(max_length=5, null=True)
+
+    def __str__(self):
+        return self.supplier_name
     
+
+class Quotation(models.Model):
+    quotaion_name = models.CharField(max_length=20)
+    supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    status_choices = (
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+        ('Under Review', 'Under Review')
+    )
+    quotation_status = models.CharField(max_length=15, choices = status_choices, default='Under Review')
