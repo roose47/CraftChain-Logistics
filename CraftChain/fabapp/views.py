@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+<<<<<<< Updated upstream
 from .models import CustomerRequirements, Inventory
+=======
+from .models import CustomerRequirements, Inventory, Customer, Order, Supplier, Invoice
+>>>>>>> Stashed changes
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -59,4 +64,107 @@ def json(request):
     data = list(CustomerRequirements.objects.values())
     data2 = list(Inventory.objects.values())
     big_data = [data,data2]
+<<<<<<< Updated upstream
     return JsonResponse(big_data, safe=False)
+=======
+    return JsonResponse(data, safe=False)
+
+def list_customers(request):
+    customer_db = Customer.objects.all()
+    all_customers = list ()
+    for customer in customer_db:
+        all_customers.append({
+            'name':customer.name,
+            'email':customer.email,
+            'phone_number':customer.phone_number
+        })
+    all_customers = list(all_customers)
+    return JsonResponse(all_customers, safe=False)
+
+def list_orders(request):
+    order_db = Order.objects.all()
+    all_orders = list()
+    for order in order_db:
+        all_orders.append({
+            'customer':order.customer.name,
+            'order_name':order.order_name,
+            'order_id':order.order_id,
+            'date':order.date,
+            'order_status':order.order_status
+        })
+
+    return JsonResponse(all_orders, safe=False)
+
+def list_suppliers(request):
+    suppliers_db = Supplier.objects.all()
+    all_suppliers = list()
+    for supplier in suppliers_db:
+        all_suppliers.append({
+            'supplier_name':supplier.supplier_name,
+            'email':supplier.email,
+            'phone':supplier.phone,
+            'rating':supplier.rating
+        })
+    return JsonResponse(all_suppliers, safe=False)
+    
+def list_invoices(request):
+    invoices_db = Invoice.objects.all()
+    all_invoices = []
+    for invoice in invoices_db:
+        all_invoices.append({
+            'order_id': invoice.order_id,
+            'invoice_amount': invoice.invoice_amount,
+            'address': invoice.address,
+            'customer_name': invoice.customer_name
+        })
+    return JsonResponse(all_invoices, safe=False)
+
+@csrf_exempt
+def add_customer(request):
+    if request.method=="POST":
+        data = json.loads(request.body)
+        name = data.get('name')
+        email = data.get('email')
+        phone_number = data.get('phone_number')
+
+        if not name or not email or not phone_number:
+            return JsonResponse({'error': 'Missing required fields'}, status=400)
+
+        customer = Customer.objects.create(name=name, email=email, phone_number=phone_number)
+        return JsonResponse({'message': 'Customer created successfully', 'customer_id': customer.id}, status=201)    
+    
+
+
+
+#
+#
+#
+# 
+# 
+# 
+# 
+# 
+
+
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
+
+# @method_decorator(csrf_exempt, name='dispatch')
+class CustomerCreateView(object):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    def post(self, request):
+        data = json.loads(request.body)
+        name = data.get('name')
+        email = data.get('email')
+        phone_number = data.get('phone_number')
+
+        if not name or not email or not phone_number:
+            return JsonResponse({'error': 'Missing required fields'}, status=400)
+
+        customer = Customer.objects.create(name=name, email=email, phone_number=phone_number)
+        return JsonResponse({'message': 'Customer created successfully', 'customer_id': customer.id}, status=201)
+>>>>>>> Stashed changes
