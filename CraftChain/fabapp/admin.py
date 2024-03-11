@@ -16,6 +16,17 @@ class CustomerAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
 
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('customer', 'date')
+
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ('customer_name', 'date')
+
+
+class QuotationAdmin(admin.ModelAdmin):
+    list_display = ('quotation_name', 'date')
+
+
 
 # class InvoiceAdmin(admin.ModelAdmin):
 #     list_display = ('customer', 'amount', 'date','status')
@@ -26,7 +37,7 @@ class CustomerAdmin(admin.ModelAdmin):
 admin.site.register(CustomerRequirements,CustomerReqAdmin)
 admin.site.register(Inventory)
 admin.site.register(Supplier)
-admin.site.register(Order)
+admin.site.register(Order,OrderAdmin)
 admin.site.register(Customer)
-admin.site.register(Invoice)
-admin.site.register(Quotation)
+admin.site.register(Invoice,InvoiceAdmin)
+admin.site.register(Quotation,QuotationAdmin)

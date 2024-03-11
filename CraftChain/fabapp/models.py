@@ -100,7 +100,7 @@ class Invoice(models.Model):
     invoice_amount = models.DecimalField(max_digits=10, decimal_places=2)
     address = models.CharField(max_length=150, null=True)
     customer_name = models.CharField(max_length=100, blank=True)  # Allow blank since it will be auto-populated
-
+    date = models.DateField(auto_now_add=True)
     def save(self, *args, **kwargs):
         # Automatically fetch the customer name from the associated order
         self.customer_name = self.order.customer.name
@@ -127,7 +127,7 @@ class Supplier(models.Model):
     
 
 class Quotation(models.Model):
-    quotaion_name = models.CharField(max_length=20)
+    quotation_name = models.CharField(max_length=20)
     supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     status_choices = (
@@ -136,3 +136,6 @@ class Quotation(models.Model):
         ('Under Review', 'Under Review')
     )
     quotation_status = models.CharField(max_length=15, choices = status_choices, default='Under Review')
+
+    def __str__(self):
+        return self.quotation_name
