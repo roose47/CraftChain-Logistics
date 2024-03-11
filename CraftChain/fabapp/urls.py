@@ -10,5 +10,8 @@ urlpatterns = [
     path('alec_api', views.apitest, name='materials'),
     path('list_customers', views.list_customers,name='list_customers'),
     path('list_invoices', views.list_invoices,name='list_invoices'),
-    path('list_suppliers', views.list_suppliers,name='list_suppliers')
+    path('list_suppliers', views.list_suppliers,name='list_suppliers'),
+    path('list_inventorys', views.list_inventorys,name='list_inventorys'),
+    path('list_orders', views.list_orders,name='list_orders'),
+    path('list_quotations', views.list_quotations,name='list_quotations')
 ]

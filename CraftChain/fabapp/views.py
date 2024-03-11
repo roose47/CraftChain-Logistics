@@ -1,6 +1,7 @@
+from collections import OrderedDict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import CustomerRequirements, Inventory, Customer,Invoice, Supplier
+from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation
 from django.http import JsonResponse
 # Create your views here.
 
@@ -72,3 +73,16 @@ def list_invoices(request):
 def list_suppliers(request):
     all_suppliers= list(Supplier.objects.values())
     return JsonResponse(all_suppliers, safe=False)
+
+def list_inventorys(request):
+    all_inventorys= list(Inventory.objects.values())
+    return JsonResponse(all_inventorys, safe=False)
+
+def list_orders(request):
+    all_orders= list(Order.objects.values())
+    return JsonResponse(all_orders, safe=False)
+
+def list_quotations(request):
+    all_quotations= list(Quotation.objects.values())
+    return JsonResponse(all_quotations, safe=False)
+
