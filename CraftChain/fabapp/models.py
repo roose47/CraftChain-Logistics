@@ -27,7 +27,7 @@ class Inventory(models.Model):
     ]
     material_name = models.CharField(max_length=50, null=True, choices=MATERIAL_CHOICES)
     material_amt = models.IntegerField()
-
+    id = models.AutoField(primary_key=True)
     def __str__(self):
         return self.material_name
 
@@ -117,6 +117,7 @@ class Invoice(models.Model):
     
 
 class Supplier(models.Model):
+    id = models.AutoField(primary_key=True)
     supplier_name = models.CharField(max_length=50, null=True,)
     phone = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField(max_length=30)
@@ -127,8 +128,9 @@ class Supplier(models.Model):
     
 
 class Quotation(models.Model):
+    id = models.AutoField(primary_key=True)
     quotation_name = models.CharField(max_length=20)
-    supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     status_choices = (
         ('Accepted', 'Accepted'),

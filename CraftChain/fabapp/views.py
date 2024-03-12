@@ -63,26 +63,80 @@ def apitest(request):
     return JsonResponse(data, safe=False)
 
 def list_customers(request):
-    all_customers = list(Customer.objects.values())
+    customer_db = Customer.objects.all()
+    all_customers = list ()
+    for customer in customer_db:
+        all_customers.append({
+            'name':customer.name,
+            'email':customer.email,
+            'phone_number':customer.phone_number
+        })
+    all_customers = list(all_customers)
     return JsonResponse(all_customers, safe=False)
 
-def list_invoices(request):
-    all_invoices = list(Invoice.objects.values())
-    return JsonResponse(all_invoices, safe=False)
-
-def list_suppliers(request):
-    all_suppliers= list(Supplier.objects.values())
-    return JsonResponse(all_suppliers, safe=False)
-
-def list_inventorys(request):
-    all_inventorys= list(Inventory.objects.values())
-    return JsonResponse(all_inventorys, safe=False)
-
 def list_orders(request):
-    all_orders= list(Order.objects.values())
+    order_db = Order.objects.all()
+    all_orders = list()
+    for order in order_db:
+        all_orders.append({
+            'customer':order.customer.name,
+            'order_name':order.order_name,
+            'order_id':order.order_id,
+            'date':order.date,
+            'order_status':order.order_status
+        })
+
     return JsonResponse(all_orders, safe=False)
 
+def list_suppliers(request):
+    suppliers_db = Supplier.objects.all()
+    all_suppliers = list()
+    for supplier in suppliers_db:
+        all_suppliers.append({
+            'supplier_id':supplier.id,
+            'supplier_name':supplier.supplier_name,
+            'email':supplier.email,
+            'phone':supplier.phone,
+            'rating':supplier.rating
+        })
+    return JsonResponse(all_suppliers, safe=False)
+    
+def list_invoices(request):
+    invoices_db = Invoice.objects.all()
+    all_invoices = []
+    for invoice in invoices_db:
+        all_invoices.append({
+            'order_id': invoice.order_id,
+            'invoice_amount': invoice.invoice_amount,
+            'address': invoice.address,
+            'date':invoice.date,
+            'customer_name': invoice.customer_name,
+            'invoice_status':invoice.order_status
+        })
+    return JsonResponse(all_invoices, safe=False)
+
+def list_inventorys(request):
+    inventory_db = Inventory.objects.all()
+    all_inventorys= list()
+    for material in inventory_db:
+        all_inventorys.append({
+            'material_id':material.id,
+            'material_name':material.material_name,
+            'material_amt':material.material_amt
+        })
+    return JsonResponse(all_inventorys, safe=False)
+
+
 def list_quotations(request):
-    all_quotations= list(Quotation.objects.values())
+    quotation_db= Quotation.objects.all()
+    all_quotations=list()
+    for quotation in quotation_db:
+        all_quotations.append({
+            'qoutation_id':quotation.id,
+            'quotation_name':quotation.quotation_name,
+            'supplier_name':quotation.supplier.supplier_name,
+            'date':quotation.date,
+            'quotation_status':quotation.quotation_status
+        })
     return JsonResponse(all_quotations, safe=False)
 
