@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation
 from django.http import JsonResponse
@@ -73,6 +73,16 @@ def list_customers(request):
         })
     all_customers = list(all_customers)
     return JsonResponse(all_customers, safe=False)
+
+def get_customer(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    data = {
+        # 'id': customer.pk,
+        'name': customer.name,
+        'email': customer.email,
+        'phone_number':customer.phone_number
+    }
+    return JsonResponse(data)
 
 def list_orders(request):
     order_db = Order.objects.all()
