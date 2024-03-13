@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 
 
@@ -67,6 +69,7 @@ def list_customers(request):
     all_customers = list ()
     for customer in customer_db:
         all_customers.append({
+            'id':customer.id,
             'name':customer.name,
             'email':customer.email,
             'phone_number':customer.phone_number
@@ -74,15 +77,50 @@ def list_customers(request):
     all_customers = list(all_customers)
     return JsonResponse(all_customers, safe=False)
 
+@csrf_exempt
+def create_customer(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        name=data.get('name')
+        email=data.get('email')
+        phone_number=data.get('phone_number')
+        Customer.objects.create(
+            name=name,
+            email=email, 
+            phone_number=phone_number
+        )
+        return HttpResponse()
+
 def get_customer(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     data = {
-        # 'id': customer.pk,
+        'id': customer.pk,
         'name': customer.name,
         'email': customer.email,
         'phone_number':customer.phone_number
     }
     return JsonResponse(data)
+
+
+@csrf_exempt
+def update_customer(request):
+    print("I was called")
+    if request.method == 'POST':
+        print("I have passed the condition check")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        id = data.get('id')
+        name=data.get('name')
+        email=data.get('email')
+        phone_number=data.get('phone_number')
+        customer=Customer.objects.get(id=id)
+        customer.name=name
+        customer.email=email
+        customer.phone_number=phone_number
+        customer.save()
+    return HttpResponse()
+
+
 
 def list_orders(request):
     order_db = Order.objects.all()
