@@ -15,13 +15,7 @@ def home(request):
     return render(request, "home.html", params)
 
 
-def delete_order(request,pk):
-    order = CustomerRequirements.objects.get(id=pk)
-    context = {'orders':order}
-    if request.method == "POST":
-        order.delete()
-        return redirect('/')
-    return render(request, "delete.html", context)
+
 
 def customer_page(request, pk):
     customer = CustomerRequirements.objects.get(id=pk)
@@ -121,6 +115,23 @@ def update_customer(request):
     return HttpResponse()
 
 
+# @csrf_exempt
+# def delete_customer(request):
+#     if request.method == 'DELETE':
+#         data = json.loads(request.body.decode('utf-8'))
+#         print(data)
+#         customer_id = data.get('customer_id')
+#         try:
+#             customer = Customer.objects.get(id=customer_id)
+#             customer.delete()
+#             return JsonResponse({'message': 'Customer deleted successfully'}, status=204)
+#         except Customer.DoesNotExist:
+#             return JsonResponse({'error': 'Customer not found'}, status=404)
+#         except Exception as e:
+#             return JsonResponse({'error': str(e)}, status=500)
+#     else:
+#         return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 def list_orders(request):
     order_db = Order.objects.all()
@@ -129,12 +140,83 @@ def list_orders(request):
         all_orders.append({
             'customer':order.customer.name,
             'order_name':order.order_name,
-            'order_id':order.order_id,
+            'id':order.order_id,
             'date':order.date,
             'order_status':order.order_status
         })
 
     return JsonResponse(all_orders, safe=False)
+
+
+@csrf_exempt
+def create_order(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        customer=data.get('customer_name')
+        order_name=data.get('order_name')
+        status = data.get('status')
+        Order.objects.create(
+            customer=Customer.objects.get(name=customer),
+            order_name=order_name, 
+            order_status=status
+        )
+        return HttpResponse()
+
+def get_order(request, pk):
+    order = Order.objects.get(order_id=pk)
+    customer_obj = order.customer
+    customer_name = customer_obj.name
+    data = {
+        "customer_name":customer_name,
+        "order_name":order.order_name,
+        "id":order.order_id,
+        "date":order.date,
+        "order_status":order.order_status
+    }
+
+    return JsonResponse(data) 
+
+@csrf_exempt
+def update_order(request):
+    print("update order was called")
+    if request.method == 'POST':
+        print("I am post methjod")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        order_id = data.get('order_id')
+        order_name= data.get('order_name')
+        order_status= data.get('order_status')
+
+        order_obj =Order.objects.get(order_id=order_id)
+        order_obj.order_name = order_name
+        order_obj.order_status = order_status
+        order_obj.save()
+
+    return HttpResponse()
+
+
+@csrf_exempt
+def delete_order(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            order = Order.objects.get(order_id=pk)
+            order.delete()
+            return JsonResponse({'message': 'Order deleted successfully'}, status=204)
+        except Customer.DoesNotExist:
+            return JsonResponse({'error': 'order not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+
+
+
 
 def list_suppliers(request):
     suppliers_db = Supplier.objects.all()
@@ -187,4 +269,55 @@ def list_quotations(request):
             'quotation_status':quotation.quotation_status
         })
     return JsonResponse(all_quotations, safe=False)
+
+def get_suppliers(request, pk):
+    supplier = Supplier.objects.get(id=pk)
+    data = {
+        "supplier_id":supplier.id,
+        "supplier_name":supplier.supplier_name,
+        "phone":supplier.phone,
+        "email":supplier.email,
+        "rating":supplier.rating
+    }
+
+    return JsonResponse(data)
+
+@csrf_exempt
+def create_suppliers(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        supplier_name=data.get('supplier_name')
+        email=data.get('email')
+        phone=data.get('phone')
+        rating= data.get('rating')
+        Supplier.objects.create(
+            supplier_name=supplier_name,
+            email=email, 
+            phone=phone,
+            rating= rating
+        )
+        return HttpResponse()
+
+@csrf_exempt
+def update_suppliers(request):
+    print("update suppliers was called")
+    if request.method == 'POST':
+        print("I am post methjod")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        supplier_id = data.get('supplier_id')
+        supplier_name= data.get('supplier_name')
+        phone= data.get('phone')
+        email= data.get('email')
+        rating= data.get('rating')
+
+        supplier_obj =Supplier.objects.get(id=supplier_id)
+        supplier_obj.supplier_name = supplier_name
+        supplier_obj.phone = phone
+        supplier_obj.email = email
+        supplier_obj.rating = rating
+        supplier_obj.save()
+
+    return HttpResponse()
 
