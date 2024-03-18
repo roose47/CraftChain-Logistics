@@ -15,6 +15,7 @@ urlpatterns = [
     # path('delete_customer', views.delete_customer,name='delete_customer'),
     path('list_invoices', views.list_invoices,name='list_invoices'),
     path('list_suppliers', views.list_suppliers,name='list_suppliers'),
+    path('delete_supplier/<int:pk>/', views.delete_supplier,name='delete_supplier'),
     path('create_suppliers', views.create_suppliers,name='create_suppliers'),
     path('get_suppliers/<int:pk>/', views.get_suppliers,name='get_suppliers'),
     path('update_suppliers', views.update_suppliers,name='update_suppliers'),

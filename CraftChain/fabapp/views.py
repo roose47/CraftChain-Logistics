@@ -321,3 +321,20 @@ def update_suppliers(request):
 
     return HttpResponse()
 
+@csrf_exempt
+def delete_supplier(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            supplier = Supplier.objects.get(id=pk)
+            supplier.delete()
+            return JsonResponse({'message': 'Supplier deleted successfully'}, status=204)
+        except Customer.DoesNotExist:
+            return JsonResponse({'error': 'Supplier not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
