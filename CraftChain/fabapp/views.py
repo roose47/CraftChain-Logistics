@@ -5,6 +5,7 @@ from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Su
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from fabapp.ml import get_prediction
 # Create your views here.
 
 
@@ -188,3 +189,7 @@ def list_quotations(request):
         })
     return JsonResponse(all_quotations, safe=False)
 
+def list_revenue(request):
+    final_predict_df = get_prediction()
+    json_data = final_predict_df.to_json(orient='records')
+    return JsonResponse(json_data, safe=False)

@@ -16,5 +16,6 @@ urlpatterns = [
     path('list_suppliers', views.list_suppliers,name='list_suppliers'),
     path('list_inventorys', views.list_inventorys,name='list_inventorys'),
     path('list_orders', views.list_orders,name='list_orders'),
-    path('list_quotations', views.list_quotations,name='list_quotations')
+    path('list_quotations', views.list_quotations,name='list_quotations'),
+    path('list_revenue', views.list_revenue,name='list_revenue')
 ]
