@@ -19,13 +19,13 @@ class CustomerRequirements(models.Model):
 
 
 class Inventory(models.Model):
-    MATERIAL_CHOICES = [
-        ('mat1', 'MAT1'),
-        ('mat2', 'MAT2'),
-        ('mat3', 'MAT2'),
-        ('mat4', 'MAT4'),
-    ]
-    material_name = models.CharField(max_length=50, null=True, choices=MATERIAL_CHOICES)
+    # MATERIAL_CHOICES = [
+    #     ('mat1', 'MAT1'),
+    #     ('mat2', 'MAT2'),
+    #     ('mat3', 'MAT2'),
+    #     ('mat4', 'MAT4'),
+    # ]
+    material_name = models.CharField(max_length=50, null=True)
     material_amt = models.IntegerField()
     id = models.AutoField(primary_key=True)
     def __str__(self):

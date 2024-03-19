@@ -36,20 +36,66 @@ def Customer_req(request):
         return redirect('/')
     return render(request, "requirements.html", {})
 
-
+@csrf_exempt
 def add_materials(request):
-    choices = Inventory.MATERIAL_CHOICES
 
     if request.method == 'POST':
-        material = request.POST.get('material_name')
-        print(material)
-        # material = request.POST['id_material_name']
-        mat_amount = request.POST['mat_amount']
-        # Validate and process the data as needed
-        Inventory(material_name=material, material_amt=mat_amount).save()
-        return redirect('/')  # Redirect to a success page or another URL
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        material_name=data.get('material_name')
+        material_amount=data.get('material_amount')
+        
+        Inventory.objects.create(
+            material_name=material_name,
+            material_amt=material_amount
+        )
+        return HttpResponse()
 
-    return render(request, 'inventory.html', {'choices': choices})
+
+def get_material(request, pk):
+    material = get_object_or_404(Inventory, pk=pk)
+    data = {
+        'material_id': material.pk,
+        'material_name': material.material_name,
+        'material_amount': material.material_amt
+    }
+    return JsonResponse(data)
+
+@csrf_exempt
+def update_material(request):
+    print("I was called")
+    if request.method == 'POST':
+        print("I have passed the condition check")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        material_id = data.get('material_id')
+        material_name=data.get('material_name')
+        material_amt=data.get('material_amount')
+        material_obj=Inventory.objects.get(id=material_id)
+        material_obj.material_name=material_name
+        material_obj.material_amt=material_amt
+        material_obj.save()
+    return HttpResponse()
+
+
+@csrf_exempt
+def delete_material(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            supplier = Inventory.objects.get(id=pk)
+            supplier.delete()
+            return JsonResponse({'message': 'materiak deleted successfully'}, status=204)
+        except Inventory.DoesNotExist:
+            return JsonResponse({'error': 'material not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 
 def apitest(request):
@@ -207,7 +253,7 @@ def delete_order(request, pk):
             order = Order.objects.get(order_id=pk)
             order.delete()
             return JsonResponse({'message': 'Order deleted successfully'}, status=204)
-        except Customer.DoesNotExist:
+        except Order.DoesNotExist:
             return JsonResponse({'error': 'order not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
@@ -312,7 +358,7 @@ def delete_invoice(request, pk):
             invoice = Invoice.objects.get(order=order_obj)
             invoice.delete()
             return JsonResponse({'message': 'Invoice deleted successfully'}, status=204)
-        except Customer.DoesNotExist:
+        except Invoice.DoesNotExist:
             return JsonResponse({'error': 'Invoice not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
@@ -407,7 +453,7 @@ def delete_supplier(request, pk):
             supplier = Supplier.objects.get(id=pk)
             supplier.delete()
             return JsonResponse({'message': 'Supplier deleted successfully'}, status=204)
-        except Customer.DoesNotExist:
+        except Supplier.DoesNotExist:
             return JsonResponse({'error': 'Supplier not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
