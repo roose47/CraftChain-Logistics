@@ -110,7 +110,7 @@ class Invoice(models.Model):
         ('Paid', 'Paid'),
         ('Unpaid', 'Unpaid')
     )
-    order_status = models.CharField(max_length=15, choices = status_choices, default='Unpaid')
+    invoice_status = models.CharField(max_length=15, choices = status_choices, default='Unpaid')
 
     def __str__(self):
         return f"{self.order.customer.name}"

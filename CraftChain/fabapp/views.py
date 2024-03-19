@@ -241,9 +241,84 @@ def list_invoices(request):
             'address': invoice.address,
             'date':invoice.date,
             'customer_name': invoice.customer_name,
-            'invoice_status':invoice.order_status
+            'invoice_status':invoice.invoice_status
         })
     return JsonResponse(all_invoices, safe=False)
+
+
+@csrf_exempt
+def create_invoice(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        order_name=data.get('order_name')
+        print("I have crossed this line")
+        invoice_amount=data.get('invoice_amount')
+        address=data.get('address')
+        invoice_status= data.get('invoice_status')
+        order_obj = Order.objects.get(order_name=order_name)
+        Invoice.objects.create(
+            order= order_obj,
+            invoice_amount=invoice_amount, 
+            address=address,
+            invoice_status=invoice_status
+        )
+        return HttpResponse()
+
+def get_invoice(request, pk):
+    order_obj = Order.objects.get(order_id=pk)
+    invoice = Invoice.objects.get(order=order_obj)
+    data = {
+        "order_id":pk,
+        "order_name":order_obj.order_name,
+        "invoice_amount":invoice.invoice_amount,
+        "address":invoice.address,
+        "invoice_status":invoice.invoice_status
+    }
+    return JsonResponse(data)
+
+
+@csrf_exempt
+def update_invoice(request):
+    print("update invoice was called")
+    if request.method == 'POST':
+        print("I am post methjod")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        order_name = data.get('order_name')
+        address = data.get('address')
+        invoice_amount= data.get('invoice_amount')
+        invoice_status= data.get('invoice_status')
+
+        order_obj = Order.objects.get(order_name=order_name)
+        invoice_obj =Invoice.objects.get(order=order_obj)
+        invoice_obj.address = address
+        invoice_obj.invoice_amount = invoice_amount
+        invoice_obj.invoice_status = invoice_status
+        invoice_obj.save()
+
+    return HttpResponse()
+
+
+@csrf_exempt
+def delete_invoice(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            order_obj = Order.objects.get(order_id = pk)
+            invoice = Invoice.objects.get(order=order_obj)
+            invoice.delete()
+            return JsonResponse({'message': 'Invoice deleted successfully'}, status=204)
+        except Customer.DoesNotExist:
+            return JsonResponse({'error': 'Invoice not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 def list_inventorys(request):
     inventory_db = Inventory.objects.all()
