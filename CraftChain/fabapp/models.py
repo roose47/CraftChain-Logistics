@@ -129,7 +129,7 @@ class Supplier(models.Model):
 
 class Quotation(models.Model):
     id = models.AutoField(primary_key=True)
-    quotation_name = models.CharField(max_length=20)
+    quotation_name = models.CharField(max_length=20, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     status_choices = (
@@ -139,5 +139,5 @@ class Quotation(models.Model):
     )
     quotation_status = models.CharField(max_length=15, choices = status_choices, default='Under Review')
 
-    def __str__(self):
-        return self.quotation_name
+    # def __str__(self):
+    #     return self.quotation_name

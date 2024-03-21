@@ -32,6 +32,12 @@ urlpatterns = [
     path('get_order/<int:pk>/', views.get_order,name='get_order'),
     path('delete_order/<int:pk>/', views.delete_order,name='delete_order'),
     path('update_order', views.update_order,name='update_order'),
+    path('list_quotations', views.list_quotations,name='list_quotations'),
+    path('create_quotation', views.create_quotation, name='create_quotation'),
+    path('get_quotation/<int:pk>/', views.get_quotation, name='get_quotation'),
+    path('update_quotation', views.update_quotation, name='update_quotation'),
+    path('delete_quotation/<int:pk>/', views.delete_quotation, name='delete_quotation'),
 
-    path('list_quotations', views.list_quotations,name='list_quotations')
+    
+
 ]

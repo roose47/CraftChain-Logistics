@@ -391,6 +391,70 @@ def list_quotations(request):
         })
     return JsonResponse(all_quotations, safe=False)
 
+@csrf_exempt
+def create_quotation(request):
+
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        quotation_name=data.get('quotation_name')
+        supplier_name=data.get('supplier_name')
+        quotation_status = data.get('quotation_status')
+        
+        Quotation.objects.create(
+           quotation_name= quotation_name,
+           supplier=Supplier.objects.get(supplier_name=supplier_name),
+           quotation_status = quotation_status
+        )
+        return HttpResponse()
+
+@csrf_exempt
+def update_quotation(request):
+    print("update quotation was called")
+    if request.method == 'POST':
+        print("I am post methjod")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        quotation_id = data.get('quotation_id')
+        quotation_name= data.get('quotation_name')
+        quotation_status= data.get('quotation_status')
+
+        quotation_obj =Quotation.objects.get(id=quotation_id)
+        quotation_obj.quotation_name = quotation_name
+        quotation_obj.quotation_status = quotation_status
+        quotation_obj.save()
+
+    return HttpResponse()
+
+@csrf_exempt
+def delete_quotation(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            supplier =  Quotation.objects.get(id=pk)
+            supplier.delete()
+            return JsonResponse({'message': 'Quotaton deleted successfully'}, status=204)
+        except Quotation.DoesNotExist:
+            return JsonResponse({'error': 'qotation not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+def get_quotation(request, pk):
+    quotation_obj = Quotation.objects.get(id=pk)
+    data = {
+        "quotation_name":quotation_obj.quotation_name,
+        "supplier_name":quotation_obj.supplier.supplier_name,
+        "quotation_status":quotation_obj.quotation_status
+    }
+
+    return JsonResponse(data)
+
+
 def get_suppliers(request, pk):
     supplier = Supplier.objects.get(id=pk)
     data = {
@@ -459,3 +523,4 @@ def delete_supplier(request, pk):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
