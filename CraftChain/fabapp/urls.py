@@ -38,7 +38,7 @@ urlpatterns = [
     path('update_quotation', views.update_quotation, name='update_quotation'),
     path('delete_quotation/<int:pk>/', views.delete_quotation, name='delete_quotation'),
     path('list_revenue', views.list_revenue,name='list_revenue'),
-    path('list_demand', views.list_demand,name='list_demand')
+    path('list_demand', views.list_demand,name='list_demand'),
     path('list_employees', views.list_employees,name='list_employees'),
     path('create_employees', views.create_employees,name='create_employees'),
     path('update_employees', views.update_employees,name='update_employees'),
@@ -49,7 +49,7 @@ urlpatterns = [
     path('create_salary', views.create_salary,name='create_salary'),
     path('update_salary', views.update_salary,name='update_salary'),
     path('get_salary/<int:pk>/', views.get_salary,name='get_salary'),
-    path('delete_salary/<int:pk>/', views.delete_salary,name='delete_salary')
+    path('delete_salary/<int:pk>/', views.delete_salary,name='delete_salary'),
     
 
 ]
