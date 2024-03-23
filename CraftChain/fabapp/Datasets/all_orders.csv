@@ -1,0 +1,741 @@
+Product Name,Sales Date,Quantity,Price
+Ms work,2019-01-04,4,130700
+Barricading,2019-01-06,1,146900
+Car parking,2019-01-07,1,11800
+Basketball post work,2019-02-09,4,136100
+Car parking weather shade,2019-02-11,3,50000
+Barricading,2019-03-05,1,20300
+Framing work,2019-03-06,1,99400
+MS Brackets,2019-04-02,150,22500
+Square Sheet Metal Junction Box,2019-04-07,20,20000
+Car parking weather shade,2019-04-13,3,81300
+Square Sheet Metal Junction Box,2019-04-15,10,10000
+Sheet Metal Boxes,2019-04-17,88,8800
+Grills,2019-04-20,4,124700
+Barricading,2019-04-21,1,144700
+Ms staircase,2019-04-23,1,50700
+Junction Box (S),2019-04-29,30,13500
+MS PLatform,2019-04-30,15,18750
+Photo frame,2019-05-05,1,73100
+Ms railing,2019-05-06,2,144100
+Square Sheet Metal Junction Box,2019-05-07,10,10000
+Sheet Metal Boxes,2019-05-09,96,9600
+MS PLatform,2019-05-11,30,37500
+Junction Box (S),2019-05-11,50,22500
+MS PLatform,2019-05-18,20,25000
+Ms gate,2019-05-19,2,143000
+MS Brackets,2019-05-21,150,22500
+Square Sheet Metal Junction Box,2019-05-22,15,15000
+MS Brackets,2019-05-24,150,22500
+Sheet Metal Boxes,2019-05-24,66,6600
+Barricading,2019-05-28,1,133700
+Junction Box (S),2019-05-29,45,20250
+Junction Box (S),2019-05-30,50,22500
+Junction Box (S),2019-06-01,50,22500
+Miscellenous works,2019-06-04,6,50500
+MS Brackets,2019-06-06,150,22500
+Safety grill,2019-06-09,3,110200
+MS PLatform,2019-06-10,25,31250
+Fixing works,2019-06-16,3,99000
+Square Sheet Metal Junction Box,2019-06-19,20,20000
+Scaffolding,2019-06-22,2,27000
+Fixing works,2019-06-24,3,53800
+Sheet Metal Boxes,2019-06-24,38,3800
+Channel gates,2019-06-28,5,54500
+Sheet Metal Boxes,2019-07-06,30,3000
+Ms railing,2019-07-08,1,56500
+Watertank ladder,2019-07-11,3,117100
+Square Sheet Metal Junction Box,2019-07-11,20,20000
+MS Brackets,2019-07-12,100,15000
+Shutter,2019-07-12,2,153200
+MS PLatform,2019-07-12,15,18750
+Barricading,2019-07-19,2,57400
+Barricading,2019-07-20,3,90900
+Junction Box (S),2019-07-27,50,22500
+Square Sheet Metal Junction Box,2019-07-28,20,20000
+Framing work,2019-07-31,4,160000
+Junction Box (S),2019-08-04,45,20250
+MS PLatform,2019-08-08,30,37500
+Ms graitings,2019-08-09,4,31300
+Sheet Metal Boxes,2019-08-12,37,3700
+Electrical box,2019-08-14,1,79000
+Square Sheet Metal Junction Box,2019-08-17,10,10000
+Square Sheet Metal Junction Box,2019-08-17,15,15000
+Fixing works,2019-08-18,4,65200
+Fixing works,2019-08-23,1,10200
+Ms window,2019-08-26,2,110500
+MS Brackets,2019-08-27,150,22500
+MS PLatform,2019-09-01,10,12500
+Weather shade,2019-09-04,2,43000
+Ms platform,2019-09-06,2,81800
+Lift door,2019-09-07,1,13600
+Square Sheet Metal Junction Box,2019-09-07,10,10000
+Ms platform,2019-09-08,2,117100
+MS Brackets,2019-09-09,100,15000
+Junction Box (S),2019-09-13,30,13500
+Sheet Metal Boxes,2019-09-14,38,3800
+Barricading,2019-09-14,1,33700
+Square Sheet Metal Junction Box,2019-09-15,20,20000
+Barricading,2019-09-17,3,179300
+Water tank,2019-09-18,4,109100
+Car parking weather shade,2019-09-23,4,22500
+Square Sheet Metal Junction Box,2019-09-25,15,15000
+Staircase,2019-09-29,4,6600
+Shutter,2019-09-29,6,81500
+Fixing duct,2019-10-09,1,160200
+Gates,2019-10-14,1,169000
+MS PLatform,2019-10-17,15,18750
+Junction Box (S),2019-10-19,50,22500
+Sheet Metal Boxes,2019-10-21,89,8900
+Railings,2019-10-24,1,22600
+Graitings,2019-10-24,1,32300
+MS Brackets,2019-10-28,150,22500
+Barricading,2019-10-28,1,164700
+Ms graitings,2019-10-28,1,112600
+Watertank ladder,2019-10-28,1,17200
+Square Sheet Metal Junction Box,2019-10-28,15,15000
+Terrace work,2019-11-04,4,83100
+Barricading,2019-11-05,1,86500
+Electrical box,2019-11-06,3,166500
+Sheet Metal Boxes,2019-11-07,92,9200
+Railings,2019-11-09,1,162400
+MS PLatform,2019-11-12,10,12500
+Square Sheet Metal Junction Box,2019-11-15,15,15000
+Channel gates,2019-11-17,1,172100
+Channel gates,2019-11-18,1,38500
+MS Brackets,2019-11-22,100,15000
+Junction Box (S),2019-11-23,25,11250
+Junction Box (S),2019-11-23,30,13500
+Channel gates,2019-11-26,1,118900
+Junction Box (S),2019-11-26,50,22500
+Barricading,2019-11-29,2,80700
+Chamber covers,2019-11-29,3,179300
+Junction box,2019-11-29,1,122800
+Ms gate,2019-12-07,5,95900
+MS PLatform,2019-12-08,20,25000
+MS Brackets,2019-12-10,150,22500
+Sheet Metal Boxes,2019-12-12,89,8900
+Junction Box (S),2019-12-15,30,13500
+Junction Box (S),2019-12-16,25,11250
+Ms door,2019-12-20,3,91700
+Square Sheet Metal Junction Box,2019-12-28,15,15000
+Barricading,2019-12-30,1,74800
+Gates,2019-12-30,4,31300
+Gates,2019-12-30,1,100100
+Spiral staircase,2019-12-30,2,24900
+Barricading,2019-12-30,1,126300
+Junction Box (S),2019-12-31,25,11250
+Square Sheet Metal Junction Box,2020-01-05,20,20000
+Gates,2020-01-06,1,52000
+Barricading,2020-01-06,4,63900
+Fixing duct,2020-01-06,1,118600
+Square Sheet Metal Junction Box,2020-01-06,10,10000
+Miscellenous works,2020-01-07,1,148000
+Framing work,2020-01-08,4,26100
+Ms gate,2020-01-09,1,33500
+Barricading,2020-01-10,1,144100
+MS PLatform,2020-01-11,20,25000
+Fixing works,2020-01-11,4,65300
+Sheet Metal Boxes,2020-01-13,44,4400
+MS Brackets,2020-01-20,100,15000
+Junction Box (S),2020-01-24,30,13500
+Railings,2020-01-31,5,5600
+Chamber covers,2020-01-31,1,85600
+Square Sheet Metal Junction Box,2020-02-03,15,15000
+Staircase,2020-02-05,2,155900
+Gates,2020-02-05,4,107900
+Car parking weather shade,2020-02-05,1,107100
+MS PLatform,2020-02-06,20,25000
+Weather shade,2020-02-07,1,112300
+Junction Box (S),2020-02-07,25,11250
+Barricading,2020-02-09,2,172700
+Sheet Metal Boxes,2020-02-13,34,3400
+Railings,2020-02-14,2,179200
+MS Brackets,2020-02-15,100,15000
+Railings,2020-02-24,3,125000
+Square Sheet Metal Junction Box,2020-02-25,20,20000
+MS Brackets,2020-03-01,150,22500
+Watertank ladder,2020-03-03,4,85400
+Car parking,2020-03-03,1,94300
+Gates,2020-03-03,1,111000
+Grills,2020-03-03,2,73800
+Barricading,2020-03-09,2,147000
+Barricading,2020-03-10,5,43500
+Safety door,2020-03-12,4,90200
+Square Sheet Metal Junction Box,2020-03-16,10,10000
+Sheet Metal Boxes,2020-03-19,100,10000
+MS PLatform,2020-03-20,15,18750
+Junction Box (S),2020-03-25,50,22500
+Shutter,2020-03-30,1,28500
+Barricading,2020-03-30,4,33900
+Sheet Metal Boxes,2020-04-01,56,5600
+MS PLatform,2020-04-05,10,12500
+Terrace work,2020-04-07,1,16300
+Square Sheet Metal Junction Box,2020-04-08,10,10000
+Water tank,2020-04-10,1,134400
+Fixing works,2020-04-11,3,167300
+Junction Box (S),2020-04-14,45,20250
+Junction Box (S),2020-04-15,50,22500
+MS Brackets,2020-04-17,100,15000
+Square Sheet Metal Junction Box,2020-04-22,20,20000
+Junction Box (S),2020-04-25,45,20250
+Car parking weather shade,2020-05-07,4,137400
+Sheet Metal Boxes,2020-05-07,68,6800
+Framing work,2020-05-09,4,62600
+Car parking weather shade,2020-05-10,1,108100
+Fixing works,2020-05-11,4,104300
+Grills,2020-05-12,1,43400
+Barricading,2020-05-15,4,160700
+Ms graitings,2020-05-15,1,40100
+Junction Box (S),2020-05-15,45,20250
+Square Sheet Metal Junction Box,2020-05-19,20,20000
+Grills,2020-05-27,2,94900
+MS Brackets,2020-05-28,150,22500
+Junction Box (S),2020-05-28,50,22500
+Junction Box (S),2020-05-30,30,13500
+MS PLatform,2020-05-31,20,25000
+Ms door,2020-06-04,2,64200
+Railings,2020-06-05,2,51400
+Ms railing,2020-06-08,1,139600
+Shutter,2020-06-10,5,133500
+Square Sheet Metal Junction Box,2020-06-11,20,20000
+Fixing works,2020-06-16,4,103400
+Fixing works,2020-06-17,1,126300
+MS PLatform,2020-06-19,25,31250
+Junction Box (S),2020-06-20,50,22500
+MS Brackets,2020-06-22,100,15000
+Ms work,2020-06-22,1,33100
+Square Sheet Metal Junction Box,2020-06-22,15,15000
+Square Sheet Metal Junction Box,2020-06-23,15,15000
+Partition works,2020-06-28,1,2300
+Sheet Metal Boxes,2020-06-28,36,3600
+Ms work,2020-06-30,1,49000
+Graitings,2020-07-05,3,149500
+MS PLatform,2020-07-08,15,18750
+Staircase,2020-07-10,2,104800
+Fixing works,2020-07-11,1,120600
+Safety door,2020-07-12,2,1100
+Ms staircase,2020-07-13,2,149300
+MS Brackets,2020-07-15,150,22500
+Barricading,2020-07-16,4,150600
+Photo frame,2020-07-18,1,132600
+Barricading,2020-07-22,4,8500
+Ms gate,2020-07-23,1,139500
+Square Sheet Metal Junction Box,2020-07-24,20,20000
+Junction Box (S),2020-07-26,45,20250
+Barricading,2020-07-26,2,148100
+Barricading,2020-07-27,2,95200
+Sheet Metal Boxes,2020-07-30,34,3400
+MS Brackets,2020-08-01,100,15000
+Junction Box (S),2020-08-03,25,11250
+Barricading,2020-08-05,4,128600
+Gi sheets,2020-08-06,2,30100
+Square Sheet Metal Junction Box,2020-08-07,20,20000
+Gates,2020-08-10,4,157600
+Ms work,2020-08-11,1,38700
+Ms door,2020-08-12,4,69000
+Electrical box,2020-08-13,1,4700
+MS PLatform,2020-08-15,30,37500
+Fixing works,2020-08-16,13,106500
+Scaffolding,2020-08-17,6,16200
+Fixing works,2020-08-19,4,61100
+Channel gates,2020-08-25,1,25600
+Car parking,2020-08-26,6,125600
+Sheet Metal Boxes,2020-08-26,30,3000
+Lift door,2020-08-29,1,138900
+Sheet Metal Boxes,2020-09-06,44,4400
+Partition works,2020-09-11,1,82700
+Ms door,2020-09-12,3,34000
+Square Sheet Metal Junction Box,2020-09-15,10,10000
+Electrical box,2020-09-17,1,32400
+Fixing works,2020-09-19,13,159400
+Square Sheet Metal Junction Box,2020-09-20,10,10000
+MS Brackets,2020-09-20,100,15000
+Fixing works,2020-09-21,4,40500
+Ms window,2020-09-22,1,110300
+Basketball post work,2020-09-23,1,87700
+MS PLatform,2020-09-24,10,12500
+Safety grill,2020-09-24,1,58900
+Ms graitings,2020-09-26,1,17700
+Square Sheet Metal Junction Box,2020-09-28,15,15000
+Fixing duct,2020-09-29,3,175400
+Junction Box (S),2020-09-30,30,13500
+Railings,2020-09-30,3,170700
+Framing work,2020-10-01,1,89100
+Square Sheet Metal Junction Box,2020-10-04,20,20000
+Grills,2020-10-05,2,73200
+Fixing works,2020-10-06,4,75300
+Ms railing,2020-10-09,1,68000
+Junction Box (S),2020-10-10,25,11250
+Railings,2020-10-10,2,97400
+Graitings,2020-10-12,4,79300
+MS PLatform,2020-10-13,10,12500
+Barricading,2020-10-15,4,700
+Ms graitings,2020-10-17,1,100400
+Grills,2020-10-22,2,107700
+MS Brackets,2020-10-22,150,22500
+Square Sheet Metal Junction Box,2020-10-27,20,20000
+Gates,2020-10-27,1,157300
+Barricading,2020-10-28,4,7700
+Junction Box (S),2020-10-29,30,13500
+Fixing duct,2020-10-29,1,164800
+Sheet Metal Boxes,2020-10-31,76,7600
+Gi sheets,2020-10-31,2,174900
+Square Sheet Metal Junction Box,2020-11-03,20,20000
+Barricading,2020-11-05,4,118100
+Gates,2020-11-05,1,124200
+Fixing works,2020-11-06,3,7600
+Grills,2020-11-07,5,8300
+Ms door,2020-11-14,1,174300
+Graitings,2020-11-15,2,2000
+Sheet Metal Boxes,2020-11-15,92,9200
+Car parking,2020-11-17,3,94300
+Watertank ladder,2020-11-18,4,85600
+MS PLatform,2020-11-18,10,12500
+Shutter,2020-11-19,2,10700
+Junction Box (S),2020-11-20,45,20250
+Gates,2020-11-24,1,125600
+Graitings,2020-11-25,4,65900
+Watertank ladder,2020-11-26,4,153700
+Grills,2020-11-28,1,52000
+Framing work,2020-11-29,2,20900
+Junction box,2020-11-30,1,40100
+MS Brackets,2020-11-30,200,30000
+Square Sheet Metal Junction Box,2020-11-30,15,15000
+Junction Box (S),2020-12-01,50,22500
+MS Brackets,2020-12-02,150,22500
+Gates,2020-12-04,4,39900
+Gates,2020-12-04,3,21300
+Spiral staircase,2020-12-04,2,2300
+Barricading,2020-12-04,4,85900
+MS PLatform,2020-12-06,20,25000
+Barricading,2020-12-07,1,180000
+Ms platform,2020-12-08,3,25100
+Sheet Metal Boxes,2020-12-08,83,8300
+Ms platform,2020-12-09,3,17300
+Graitings,2020-12-10,3,142800
+Ms work,2020-12-11,1,27200
+Framing work,2020-12-15,1,94600
+Chamber covers,2020-12-17,1,30200
+Car parking weather shade,2020-12-19,8,20800
+Car parking,2020-12-20,4,4000
+Junction box,2020-12-21,8,174100
+Grills,2020-12-22,10,14800
+Chamber covers,2020-12-23,1,152500
+Junction Box (S),2020-12-24,30,13500
+Grills,2020-12-27,2,123400
+Watertank ladder,2020-12-28,1,58600
+Barricading,2020-12-29,7,69700
+Square Sheet Metal Junction Box,2020-12-30,10,10000
+Square Sheet Metal Junction Box,2021-01-02,20,20000
+Junction box,2021-01-03,4,52300
+Staircase,2021-01-04,1,63300
+Watertank ladder,2021-01-06,7,114800
+MS PLatform,2021-01-07,25,31250
+Safety door,2021-01-07,8,84700
+Square Sheet Metal Junction Box,2021-01-14,15,15000
+Car parking,2021-01-14,3,81900
+Car parking weather shade,2021-01-16,8,114500
+Ms door,2021-01-17,6,34100
+Car parking,2021-01-19,6,111300
+Square Sheet Metal Junction Box,2021-01-20,10,10000
+Watertank ladder,2021-01-20,1,14700
+Square Sheet Metal Junction Box,2021-01-21,20,20000
+Sheet Metal Boxes,2021-01-24,43,4300
+Shutter,2021-01-25,5,69200
+MS Brackets,2021-01-26,150,22500
+Junction Box (S),2021-01-28,30,13500
+Gates,2021-01-28,6,36900
+Graitings,2021-01-30,5,23100
+Watertank ladder,2021-01-31,9,5200
+Sheet Metal Boxes,2021-02-02,40,4000
+Watertank ladder,2021-02-09,6,60100
+Square Sheet Metal Junction Box,2021-02-10,20,20000
+Miscellenous works,2021-02-11,4,1300
+Grills,2021-02-13,5,43600
+MS Brackets,2021-02-13,150,22500
+Grills,2021-02-14,2,27300
+Framing work,2021-02-15,3,38200
+MS PLatform,2021-02-17,25,31250
+Spiral staircase,2021-02-17,4,8800
+Junction Box (S),2021-02-21,45,20250
+Car parking,2021-02-21,2,147000
+Square Sheet Metal Junction Box,2021-02-23,10,10000
+Car parking,2021-02-24,1,62000
+Square Sheet Metal Junction Box,2021-02-26,20,20000
+Watertank ladder,2021-02-27,4,39500
+Watertank ladder,2021-03-01,7,31300
+Grills,2021-03-02,1,89300
+Square Sheet Metal Junction Box,2021-03-04,10,10000
+Grills,2021-03-05,5,70900
+Junction box,2021-03-06,4,104800
+MS Brackets,2021-03-06,100,15000
+MS PLatform,2021-03-08,10,12500
+Sheet Metal Boxes,2021-03-10,57,5700
+Junction Box (S),2021-03-17,45,20250
+Watertank ladder,2021-03-20,4,36500
+Safety door,2021-03-21,1,62800
+Framing work,2021-03-25,2,153300
+Safety door,2021-03-27,4,179800
+Staircase,2021-03-28,3,7900
+Railings,2021-03-31,4,64400
+Gates,2021-04-01,1,147400
+Framing work,2021-04-02,7,65600
+Graitings,2021-04-03,1,107500
+MS Brackets,2021-04-06,100,15000
+Spiral staircase,2021-04-13,6,30800
+Junction Box (S),2021-04-13,30,13500
+Sheet Metal Boxes,2021-04-17,71,7100
+Car parking,2021-04-20,8,10100
+Safety door,2021-04-21,6,7600
+Square Sheet Metal Junction Box,2021-04-21,20,20000
+Bridge between wings,2021-04-23,1,163900
+Junction Box (S),2021-04-29,25,11250
+MS PLatform,2021-04-30,15,18750
+Junction Box (S),2021-05-04,25,11250
+Framing work,2021-05-05,6,39400
+Graitings,2021-05-06,1,140600
+MS Brackets,2021-05-09,150,22500
+MS PLatform,2021-05-13,20,25000
+Sheet Metal Boxes,2021-05-13,89,8900
+Junction Box (S),2021-05-16,25,11250
+Car parking,2021-05-19,9,168400
+Square Sheet Metal Junction Box,2021-05-26,10,10000
+Junction Box (S),2021-05-26,25,11250
+Car parking,2021-05-28,1,32700
+Junction box,2021-06-02,4,109800
+Car parking weather shade,2021-06-03,2,67600
+Graitings,2021-06-04,1,159500
+MS PLatform,2021-06-07,30,37500
+Safety door,2021-06-09,4,41400
+MS Brackets,2021-06-15,150,22500
+Gates,2021-06-16,12,22100
+Sheet Metal Boxes,2021-06-17,34,3400
+Junction Box (S),2021-06-19,45,20250
+Barricading,2021-06-22,6,167400
+Framing work,2021-06-24,7,37400
+Chamber covers,2021-06-28,5,162600
+Square Sheet Metal Junction Box,2021-06-28,10,10000
+Square Sheet Metal Junction Box,2021-07-01,20,20000
+Car parking,2021-07-01,5,101500
+Square Sheet Metal Junction Box,2021-07-05,10,10000
+Framing work,2021-07-08,2,61400
+MS Brackets,2021-07-09,100,15000
+Fencing,2021-07-11,6,96900
+MS PLatform,2021-07-11,10,12500
+Car parking platform,2021-07-12,1,132900
+Square Sheet Metal Junction Box,2021-07-12,20,20000
+Square Sheet Metal Junction Box,2021-07-14,20,20000
+Junction Box (S),2021-07-14,45,20250
+Sheet Metal Boxes,2021-07-18,37,3700
+Ms door,2021-07-19,3,90100
+Car parking,2021-07-20,4,75600
+Framing work,2021-07-31,5,171600
+Sheet Metal Boxes,2021-08-09,48,4800
+Square Sheet Metal Junction Box,2021-08-09,15,15000
+Framing work,2021-08-09,9,36800
+Railings,2021-08-14,4,154100
+Junction Box (S),2021-08-15,25,11250
+MS Brackets,2021-08-16,150,22500
+Junction box,2021-08-18,2,164600
+MS PLatform,2021-08-19,20,25000
+Square Sheet Metal Junction Box,2021-08-21,15,15000
+Watertank ladder,2021-08-23,4,100600
+Framing work,2021-08-26,4,159200
+Square Sheet Metal Junction Box,2021-08-30,20,20000
+Barricading,2021-09-01,8,111400
+Square Sheet Metal Junction Box,2021-09-03,15,15000
+Gates,2021-09-04,9,119200
+Car parking weather shade,2021-09-06,5,80500
+Sheet Metal Boxes,2021-09-06,31,3100
+Framing work,2021-09-07,12,151200
+Staircase,2021-09-08,3,144700
+Junction Box (S),2021-09-09,25,11250
+MS Brackets,2021-09-12,150,22500
+Square Sheet Metal Junction Box,2021-09-13,10,10000
+Staircase,2021-09-14,8,18800
+Barricading,2021-09-17,5,43400
+Junction box,2021-09-18,2,172900
+Ms door,2021-09-23,1,74100
+MS PLatform,2021-09-25,15,18750
+Gates,2021-09-29,4,168300
+Chamber covers,2021-09-29,2,48200
+Safety door,2021-10-09,1,170400
+Sheet Metal Boxes,2021-10-12,96,9600
+Junction Box (S),2021-10-12,25,11250
+Barricading,2021-10-14,3,148100
+Junction Box (S),2021-10-14,50,22500
+Junction Box (S),2021-10-17,50,22500
+MS Brackets,2021-10-23,150,22500
+Ms pipe,2021-10-24,1,32700
+Ms frame,2021-10-24,1,112200
+Square Sheet Metal Junction Box,2021-10-25,20,20000
+MS PLatform,2021-10-25,10,12500
+Miscellenous works,2021-10-28,4,2900
+Barricading,2021-10-28,3,34100
+Barricading,2021-10-28,6,87200
+Safety door,2021-11-02,1,115400
+Junction Box (S),2021-11-03,25,11250
+Gates,2021-11-03,1,101300
+Barricading,2021-11-04,4,88500
+Spiral staircase,2021-11-05,5,119200
+MS Brackets,2021-11-06,100,15000
+Gates,2021-11-06,4,29800
+Square Sheet Metal Junction Box,2021-11-08,10,10000
+Gates,2021-11-09,3,22600
+Duct,2021-11-17,4,153600
+Ms support,2021-11-18,1,64200
+MS PLatform,2021-11-20,10,12500
+Sheet Metal Boxes,2021-11-20,64,6400
+Junction Box (S),2021-11-20,30,13500
+Junction Box (S),2021-11-25,45,20250
+Gi sheet,2021-11-26,1,15100
+Shutter,2021-11-29,1,94100
+Balcony shade,2021-11-29,1,102700
+Framing work,2021-11-29,1,38500
+Square Sheet Metal Junction Box,2021-12-04,10,10000
+Channel gates,2021-12-07,10,43500
+MS Brackets,2021-12-16,100,15000
+MS PLatform,2021-12-17,20,25000
+Car parking platform,2021-12-20,1,44500
+Junction Box (S),2021-12-28,30,13500
+Sheet Metal Boxes,2021-12-29,94,9400
+Miscellenous works,2021-12-30,3,122600
+Miscellenous works,2021-12-30,1,29900
+Gate works,2021-12-30,1,61700
+Gi sheet,2021-12-30,1,17800
+Gate works,2021-12-30,3,124700
+Sheet Metal Boxes,2022-01-01,41,4100
+Square Sheet Metal Junction Box,2022-01-05,10,10000
+Fixing works,2022-01-06,4,167200
+Ms door,2022-01-07,1,129200
+MS PLatform,2022-01-07,25,31250
+Railings,2022-01-08,10,125900
+MS Brackets,2022-01-10,150,22500
+Junction Box (S),2022-01-10,25,11250
+Square Sheet Metal Junction Box,2022-01-21,15,15000
+Square Sheet Metal Junction Box,2022-01-25,20,20000
+Miscellenous works,2022-01-31,2,167300
+Miscellenous works,2022-01-31,2,69900
+Square Sheet Metal Junction Box,2022-02-04,15,15000
+MS Brackets,2022-02-06,100,15000
+Ms window,2022-02-06,1,84500
+Junction Box (S),2022-02-07,50,22500
+Sheet Metal Boxes,2022-02-07,37,3700
+Graitings,2022-02-07,2,108000
+Watertank ladder,2022-02-08,7,141300
+Square Sheet Metal Junction Box,2022-02-08,10,10000
+Framing work,2022-02-09,4,96000
+Watertank ladder,2022-02-11,1,74400
+MS PLatform,2022-02-13,25,31250
+Celing supprt,2022-02-14,3,30100
+Graitings,2022-02-24,1,29900
+Ms door,2022-03-03,2,114700
+Gate,2022-03-03,4,15500
+Miscellenous works,2022-03-03,1,62600
+Gi sheet barracading,2022-03-03,1,98500
+Square Sheet Metal Junction Box,2022-03-03,15,15000
+Fabrication work,2022-03-05,11,146600
+Basketball post work,2022-03-06,1,58000
+MS Brackets,2022-03-07,200,30000
+Chamber covers,2022-03-07,1,64500
+Car parking,2022-03-08,7,6000
+MS PLatform,2022-03-11,10,12500
+Junction Box (S),2022-03-18,45,20250
+Sheet Metal Boxes,2022-03-23,62,6200
+Square Sheet Metal Junction Box,2022-03-23,10,10000
+Ms board,2022-03-30,1,28200
+Barricading,2022-03-30,8,106600
+Ms grill,2022-04-05,1,83100
+Safety grill,2022-04-06,1,117000
+Junction Box (S),2022-04-07,30,13500
+Chamber covers,2022-04-07,1,45500
+Grills,2022-04-08,1,159200
+Sheet Metal Boxes,2022-04-12,69,6900
+MS PLatform,2022-04-17,10,12500
+MS Brackets,2022-04-19,200,30000
+Square Sheet Metal Junction Box,2022-04-28,10,10000
+Railings,2022-05-05,1,65000
+Ms graitings,2022-05-06,1,133300
+MS Brackets,2022-05-06,200,30000
+Graitings,2022-05-07,1,114400
+Gates,2022-05-08,5,119900
+Junction Box (S),2022-05-09,45,20250
+Square Sheet Metal Junction Box,2022-05-13,15,15000
+Miscellenous works,2022-05-13,1,71600
+Weather shade,2022-05-14,1,163900
+Terrace work,2022-05-15,1,88100
+Car parking weather shade,2022-05-16,4,153800
+Grills,2022-05-17,5,119200
+Barricading,2022-05-18,1,152100
+MS PLatform,2022-05-18,25,31250
+Ms staircase,2022-05-19,2,140200
+Sheet Metal Boxes,2022-05-20,69,6900
+Barricading,2022-05-20,4,123600
+Photo frame,2022-05-21,1,179800
+Barricading,2022-05-22,4,106200
+Ms gate,2022-05-23,1,83300
+Barricading,2022-05-24,2,168100
+Barricading,2022-05-25,2,145000
+Framing work,2022-05-26,4,50800
+Ms railing,2022-05-27,1,59300
+Ms platform,2022-05-28,3,123900
+Electrical box,2022-05-29,1,7400
+Fixing works,2022-05-30,13,76800
+Scaffolding,2022-05-31,6,100300
+Drainage covers,2022-06-04,3,47500
+Framing work,2022-06-05,1,90000
+Fixing duct,2022-06-06,3,166300
+Car parking,2022-06-07,2,37500
+Safety door,2022-06-08,8,44400
+Junction Box (S),2022-06-09,25,11250
+Safety door,2022-06-09,1,135500
+Staircase,2022-06-13,2,37000
+Gates,2022-06-14,4,146600
+MS Brackets,2022-06-14,100,15000
+Square Sheet Metal Junction Box,2022-06-14,20,20000
+Railings,2022-06-15,2,105100
+Sheet Metal Boxes,2022-06-16,35,3500
+Graitings,2022-06-16,3,166700
+Barricading,2022-06-17,4,30000
+Ms graitings,2022-06-18,1,67100
+Grills,2022-06-19,2,63900
+Gates,2022-06-20,1,55700
+Barricading,2022-06-21,4,7300
+Fixing duct,2022-06-22,1,125900
+Gi sheets,2022-06-23,2,44500
+Fixing works,2022-06-24,4,73300
+Fixing works,2022-06-25,3,25100
+Fixing works,2022-06-26,4,15200
+Fixing works,2022-06-27,1,113100
+Ms work,2022-06-28,1,93800
+MS PLatform,2022-06-29,20,25000
+Partition works,2022-06-29,1,166500
+Ms work,2022-06-30,1,34900
+Framing work,2022-07-05,1,69000
+Railings,2022-07-06,3,16400
+Square Sheet Metal Junction Box,2022-07-06,20,20000
+Junction box,2022-07-07,2,167500
+Square Sheet Metal Junction Box,2022-07-08,15,15000
+Channel gates,2022-07-08,3,55300
+MS Brackets,2022-07-09,100,15000
+Square Sheet Metal Junction Box,2022-07-10,10,10000
+Junction box,2022-07-11,3,20100
+MS PLatform,2022-07-11,15,18750
+Chamber covers,2022-07-12,4,116600
+Sheet Metal Boxes,2022-07-12,33,3300
+Car parking weather shade,2022-07-13,1,1900
+Watertank ladder,2022-07-14,1,42200
+Channel gates,2022-07-15,5,19800
+Channel gates,2022-07-16,2,126900
+Channel gates,2022-07-17,3,25900
+Chamber covers,2022-07-18,4,96600
+Junction box,2022-07-19,1,86600
+Barricading,2022-07-20,2,144800
+Shutter,2022-07-21,1,103500
+Ms door,2022-07-22,4,72700
+Barricading,2022-07-23,1,179800
+Square Sheet Metal Junction Box,2022-07-23,10,10000
+Spiral staircase,2022-07-24,2,40200
+Gates,2022-07-25,4,117900
+Gates,2022-07-26,3,133600
+Barricading,2022-07-27,4,150600
+Framing work,2022-07-28,1,177800
+Chamber covers,2022-07-29,1,142300
+Railings,2022-07-30,1,121000
+Junction Box (S),2022-07-30,30,13500
+Railings,2022-07-31,1,179800
+Channel gates,2022-08-05,4,143400
+Barricading,2022-08-06,1,79200
+Junction box,2022-08-07,3,140700
+Junction box,2022-08-08,3,21100
+Staircase,2022-08-09,1,154500
+Sheet Metal Boxes,2022-08-13,44,4400
+Square Sheet Metal Junction Box,2022-08-19,15,15000
+Junction Box (S),2022-08-23,30,13500
+Square Sheet Metal Junction Box,2022-08-24,15,15000
+MS PLatform,2022-08-25,20,25000
+MS Brackets,2022-08-26,150,22500
+Car parking weather shade,2022-09-05,4,10000
+Sheet Metal Boxes,2022-09-05,29,2900
+Junction Box (S),2022-09-06,25,11250
+Barricading,2022-09-06,5,14600
+Junction box,2022-09-07,3,135400
+MS PLatform,2022-09-08,15,18750
+Barricading,2022-09-08,5,24100
+Graitings,2022-09-14,1,13300
+Square Sheet Metal Junction Box,2022-09-14,10,10000
+Gates,2022-09-17,4,164500
+Square Sheet Metal Junction Box,2022-09-17,20,20000
+MS Brackets,2022-09-17,100,15000
+Barricading,2022-09-18,5,126600
+Spiral staircase,2022-09-23,1,56200
+Safety door,2022-09-29,4,4200
+Car parking,2022-09-29,2,70900
+Square Sheet Metal Junction Box,2022-09-30,15,15000
+Ms truss,2022-10-01,1,144700
+Gate works,2022-10-05,4,156200
+Water tank,2022-10-06,1,150200
+Car parking weather shade,2022-10-07,2,12600
+Channel gates,2022-10-08,8,132400
+Sheet Metal Boxes,2022-10-08,54,5400
+MS PLatform,2022-10-08,10,12500
+Railings,2022-10-09,1,178200
+Bridge between wings,2022-10-14,1,36800
+Square Sheet Metal Junction Box,2022-10-15,10,10000
+Junction Box (S),2022-10-28,25,11250
+MS Brackets,2022-10-28,200,30000
+Car parking,2022-10-28,4,102900
+Spiral staircase,2022-10-28,2,85900
+Car parking,2022-10-28,2,97500
+Square Sheet Metal Junction Box,2022-11-04,20,20000
+Staircase works,2022-11-05,1,59600
+Car parking weather shade,2022-11-06,1,146900
+Safety door,2022-11-07,3,132500
+Staircase,2022-11-09,1,130700
+Graitings,2022-11-17,1,100600
+Car parking weather shade,2022-11-18,1,26700
+Junction Box (S),2022-11-20,45,20250
+MS PLatform,2022-11-22,10,12500
+Junction Box (S),2022-11-25,45,20250
+Sheet Metal Boxes,2022-11-25,59,5900
+Gates,2022-11-26,1,151900
+Barricading,2022-11-29,1,12500
+Framing work,2022-11-29,5,97500
+Gates,2022-11-29,2,149700
+Square Sheet Metal Junction Box,2022-11-29,15,15000
+MS Brackets,2022-11-30,200,30000
+Drainage covers,2022-12-04,2,150700
+Ms board,2022-12-04,1,98200
+Ms board,2022-12-04,1,80700
+Fencing,2022-12-04,1,69400
+Miscellenous works,2022-12-05,1,150000
+Square Sheet Metal Junction Box,2022-12-05,10,10000
+Shutter,2022-12-06,5,131800
+Watertank ladder,2022-12-07,5,43800
+Junction Box (S),2022-12-10,25,11250
+MS Brackets,2022-12-13,200,30000
+Square Sheet Metal Junction Box,2022-12-18,10,10000
+MS PLatform,2022-12-19,25,31250
+Safety door,2022-12-20,1,96700
+Sheet Metal Boxes,2022-12-24,63,6300
+Ms door,2022-12-30,4,955900
+Channel gates,2022-12-30,5,108000
+Junction Box (S),2022-12-30,45,20250
+Square Sheet Metal Junction Box,2023-01-02,10,10000
+MS PLatform,2023-01-09,25,31250
+MS Brackets,2023-01-11,150,22500
+Sheet Metal Boxes,2023-01-12,40,4000
+Junction Box (S),2023-01-19,45,20250
+Square Sheet Metal Junction Box,2023-01-26,10,10000
+MS PLatform,2023-02-01,30,37500
+Sheet Metal Boxes,2023-02-13,41,4100
+MS Brackets,2023-02-18,100,15000
+Junction Box (S),2023-02-22,45,20250
+Square Sheet Metal Junction Box,2023-02-26,15,15000
+Sheet Metal Boxes,2023-03-14,77,7700
+MS Brackets,2023-03-15,200,30000
+Junction Box (S),2023-03-17,50,22500
+MS PLatform,2023-03-18,15,18750
+Square Sheet Metal Junction Box,2023-03-26,15,15000
+Junction Box (S),2023-03-30,30,13500

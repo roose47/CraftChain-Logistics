@@ -5,9 +5,10 @@ from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Su
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from fabapp.ml import get_prediction, get_demand
 # Create your views here.
 
-
+#atattaetat
 def home(request):
     all_orders = CustomerRequirements.objects.all()
     total_orders = all_orders.count()
@@ -523,4 +524,17 @@ def delete_supplier(request, pk):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+def list_revenue(request):
+    final_predict_df = get_prediction()
+    json_data = final_predict_df.to_json(orient='records')
+    return JsonResponse(json_data, safe=False)
+
+def list_demand(request):
+    final_predict_dfs = get_demand()
+    json_responses=[]
+    for df in final_predict_dfs:
+        json_data = df.to_json(orient='records')
+        json_responses.append(json_data)
+    return JsonResponse(json_responses, safe=False)
     

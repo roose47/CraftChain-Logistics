@@ -37,7 +37,7 @@ urlpatterns = [
     path('get_quotation/<int:pk>/', views.get_quotation, name='get_quotation'),
     path('update_quotation', views.update_quotation, name='update_quotation'),
     path('delete_quotation/<int:pk>/', views.delete_quotation, name='delete_quotation'),
-
-    
+    path('list_revenue', views.list_revenue,name='list_revenue'),
+    path('list_demand', views.list_demand,name='list_demand')
 
 ]
