@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation
+from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation, Salary, Employee
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -524,3 +524,157 @@ def delete_supplier(request, pk):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
+
+
+def list_employees(request):
+    employee_db = Employee.objects.all()
+    all_employees = list ()
+    for employee in employee_db:
+        all_employees.append({
+            'employee_id':employee.id,
+            'name':employee.name,
+            'address':employee.address,
+            'phone_number':employee.phone_number,
+            'date':employee.date,
+        })
+    return JsonResponse(all_employees, safe=False)
+
+
+@csrf_exempt
+def create_employees(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        name=data.get('name')
+        address=data.get('address')
+        phone_number=data.get('phone_number')
+        Employee.objects.create(
+            name=name,
+            address=address, 
+            phone_number=phone_number
+        )
+        return HttpResponse()
+
+
+
+
+@csrf_exempt
+def update_employees(request):
+    print("I was called")
+    if request.method == 'POST':
+        print("I have passed the condition check")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        id = data.get('id')
+        name=data.get('name')
+        address=data.get('address')
+        phone_number=data.get('phone_number')
+        employee=Employee.objects.get(id=id)
+        employee.name=name
+        employee.address=address
+        employee.phone_number=phone_number
+        employee.save()
+    return HttpResponse()
+
+def get_employees(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    data = {
+        'id': employee.pk,
+        'name': employee.name,
+        'address': employee.address,
+        'phone_number':employee.phone_number
+    }
+    return JsonResponse(data)
+
+@csrf_exempt
+def delete_employees(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            employee = Employee.objects.get(id=pk)
+            employee.delete()
+            return JsonResponse({'message': 'Employee deleted successfully'}, status=204)
+        except Supplier.DoesNotExist:
+            return JsonResponse({'error': 'Employee not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+
+def list_salary(request):
+    salary_db = Salary.objects.all()
+    all_salary = list()
+    for salary in salary_db:
+        all_salary.append({
+            'employee':salary.name.name,
+            'id':salary.id,
+            'date':salary.date,
+            'amount':salary.amount
+        })
+    
+    return JsonResponse(all_salary, safe=False)
+
+
+@csrf_exempt
+def create_salary(request):
+    if request.method=="POST":
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        employee=data.get('employee_name')
+        amount = data.get('amount')
+        Salary.objects.create(
+            employee=Employee.objects.get(name=employee),
+            salary_amount=amount
+        )
+        return HttpResponse()
+
+def get_salary(request, pk):
+    salary_obj = Salary.objects.get(id=pk)
+    employee_obj = salary_obj.name
+    employee_name = employee_obj.name
+    data = {
+        "id":pk,
+        "employee_name":employee_name,
+        "date":salary_obj.date,
+        "amount":salary_obj.amount
+    }
+
+    return JsonResponse(data) 
+
+@csrf_exempt
+def update_salary(request):
+    print("update order was called")
+    if request.method == 'POST':
+        print("I am post methjod")
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        salary_id = data.get('salary_id')
+        amount= data.get('amount')
+
+        salary_obj =Salary.objects.get(salary_id=salary_id)
+        salary_obj.amount = amount
+        salary_obj.save()
+
+    return HttpResponse()
+
+
+@csrf_exempt
+def delete_salary(request, pk):
+
+    if request.method == 'DELETE':
+        # data = json.loads(request.body.decode('utf-8'))
+        # print(data)
+        # customer_id = data.get('customer_id')
+        try:
+            salary = Salary.objects.get(salary_id=pk)
+            salary.delete()
+            return JsonResponse({'message': 'Order deleted successfully'}, status=204)
+        except Salary.DoesNotExist:
+            return JsonResponse({'error': 'order not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
