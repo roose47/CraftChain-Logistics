@@ -42,9 +42,6 @@ di = {
     }
 
 
-
-
-
 def get_prediction():
     formatted_datetime = today_datetime.strftime('%Y-%m-%d')
     print("sffasdfaf" ,formatted_datetime)
@@ -118,9 +115,12 @@ def get_prediction():
         # print(svr_pre_test_set[index][0], actual_sales[index])
         result_list.append(svr_pre_test_set[index][0] + actual_sales[index])
 
+    result_list = np.round(result_list).astype(int)
     svr_pre_series = pd.Series(result_list, name="SVM Prediction")
+    final_predict_df['date'] = final_predict_df['date'].astype(str)
+    # print(final_predict_df['date'].dtype)
     final_predict_df = final_predict_df.merge(svr_pre_series, left_index=True, right_index = True)
-    print(final_predict_df)
+    # print(final_predict_df)
     return final_predict_df
     # print(final_predict_df)
 
@@ -205,11 +205,12 @@ def get_demand():
                 for index in range(0, len(svr_pre_test_set)):
                     # print(svr_pre_test_set[index][0], actual_sales[index])
                     result_list.append(svr_pre_test_set[index][0] + actual_sales[index])
-
+                result_list = np.round(result_list).astype(int)
                 svr_pre_series = pd.Series(result_list, name="SVM Prediction")
+                final_predict_df['date'] = final_predict_df['date'].astype(str)
                 final_predict_df = final_predict_df.merge(svr_pre_series, left_index=True, right_index = True)
                 prediction_dfs.append(final_predict_df)
-                print("XDDDDDDDDDDDDDD")
+                # print("XDDDDDDDDDDDDDD")
                 print(prediction_dfs)
     return prediction_dfs
 # models = {'Random Forest': RandomForestRegressor()}
