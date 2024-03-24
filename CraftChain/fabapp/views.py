@@ -527,6 +527,7 @@ def delete_supplier(request, pk):
     
 def list_revenue(request):
     final_predict_df = get_prediction()
+    final_predict_df.rename(columns={"SVM Prediction": "SVM_Prediction"}, inplace=True)
     json_data = final_predict_df.to_dict(orient='records')
     return JsonResponse(json_data, safe=False)
 
