@@ -527,7 +527,7 @@ def delete_supplier(request, pk):
     
 def list_revenue(request):
     final_predict_df = get_prediction()
-    json_data = final_predict_df.to_json(orient='records')
+    json_data = final_predict_df.to_dict(orient='records')
     return JsonResponse(json_data, safe=False)
 
 def list_demand(request):
