@@ -15,7 +15,7 @@ today_datetime = datetime.datetime.now()
 
 # Format the datetime object to the desired format
 
-print("store_sales", store_sales)
+# print("store_sales", store_sales)
 
 
         # future_dates = pd.date_range(start=pd.Timestamp('2023-03-01 00:00:00') + pd.DateOffset(months=1), periods=12, freq='MS')print(store_sales)
@@ -44,14 +44,14 @@ di = {
 
 def get_prediction():
     formatted_datetime = today_datetime.strftime('%Y-%m-%d')
-    print("sffasdfaf" ,formatted_datetime)
+    # print("sffasdfaf" ,formatted_datetime)
     future_dates = pd.date_range(start=pd.Timestamp(formatted_datetime) + pd.DateOffset(months=1), periods=12, freq='MS')
 
     future_dates = pd.DataFrame(future_dates, columns=['date'])
 
     #optional
     monthly_sales = store_sales.groupby('date').sum().reset_index() #reset_index to keep the index
-    print("monthly_sales", monthly_sales)
+    # print("monthly_sales", monthly_sales)
     # monthly_sales
 
     monthly_sales['month'] = monthly_sales['date'].dt.month
@@ -65,12 +65,12 @@ def get_prediction():
     future_sales_diff = []
     for i in range(1, 12): #was 13
         col_name = 'month_' + str(i)
-        print(monthly_sales['sales_diff'].iloc[-i])
+        # print(monthly_sales['sales_diff'].iloc[-i])
         future_sales_diff.append(monthly_sales['sales_diff'].iloc[-i])
 
     # Convert to array and reshape for compatibility with scaler
     future_sales_diff = np.array(future_sales_diff)
-    print("future_sales_difference ",future_sales_diff)
+    # print("future_sales_difference ",future_sales_diff)
 
     future_sales_diff = pd.DataFrame(future_sales_diff, columns=['sales_diff'])
 
@@ -128,7 +128,7 @@ def get_demand():
     prediction_dfs = []
     for product in ['MS Brackets', 'Square Sheet Metal Junction Box', 'Sheet Metal Boxes', 'Junction Box (S)', 'MS PLatform']:#,'Square Sheet Metal Junction Box', 'Sheet Metal Boxes', 'Junction Box (S)', 'MS PLatform'
         
-        print(f"*******************{product}********************")
+        # print(f"*******************{product}********************")
         future_dates = pd.date_range(start=pd.Timestamp('2023-03-01 00:00:00') + pd.DateOffset(months=1), periods=12, freq='MS')
         future_dates = pd.DataFrame(future_dates, columns=['date'])
         # print("top_product_sales", top_product_sales)
@@ -211,7 +211,7 @@ def get_demand():
                 final_predict_df = final_predict_df.merge(svr_pre_series, left_index=True, right_index = True)
                 prediction_dfs.append(final_predict_df)
                 # print("XDDDDDDDDDDDDDD")
-                print(prediction_dfs)
+                # print(prediction_dfs)
     return prediction_dfs
 # models = {'Random Forest': RandomForestRegressor()}
 # store_sales = pd.read_csv("./fabapp/Datasets/top_products.csv")

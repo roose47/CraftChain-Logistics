@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from fabapp.ml import get_prediction, get_demand
+import pandas as pd
 # Create your views here.
 
 #atattaetat
@@ -528,14 +529,24 @@ def delete_supplier(request, pk):
 def list_revenue(request):
     final_predict_df = get_prediction()
     final_predict_df.rename(columns={"SVM Prediction": "SVM_Prediction"}, inplace=True)
+    
+    # Convert 'date' column to datetime format
+    final_predict_df['date'] = pd.to_datetime(final_predict_df['date'])
+    # Extract month name from the 'date' column and assign it to a new column 'month'
+    final_predict_df['month'] = final_predict_df['date'].dt.strftime('%b')
+    print(final_predict_df)
     json_data = final_predict_df.to_dict(orient='records')
     return JsonResponse(json_data, safe=False)
 
 def list_demand(request):
     final_predict_dfs = get_demand()
     json_responses=[]
+    final_response ={}
     for df in final_predict_dfs:
+        # print("Before to json df", df )
         json_data = df.to_json(orient='records')
+        # put material name as a key in final response dict and value as the above variable named json_data
+        print("\nAfter json", json_data)
         json_responses.append(json_data)
     return JsonResponse(json_responses, safe=False)
     
