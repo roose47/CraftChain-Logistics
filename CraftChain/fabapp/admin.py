@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import CustomerRequirements, Inventory, Supplier,Customer, Order, Invoice,Quotation, Employee, Salary
+from .models import CustomerRequirements, Inventory, Supplier,Customer, Order, Invoice,Quotation, Employee, Salary, Attendance
 
 
 class CustomerReqAdmin(admin.ModelAdmin):
@@ -43,3 +43,4 @@ admin.site.register(Invoice,InvoiceAdmin)
 admin.site.register(Quotation,QuotationAdmin)
 admin.site.register(Employee)
 admin.site.register(Salary)
+admin.site.register(Attendance)

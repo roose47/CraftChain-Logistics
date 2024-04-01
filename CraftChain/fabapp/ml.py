@@ -125,10 +125,17 @@ def get_prediction():
     # print(final_predict_df)
 
 def get_demand():
-    prediction_dfs = []
+    # prediction_dfs = {
+    #     'MS Brackets': [], 
+    #     'Square Sheet Metal Junction Box': [], 
+    #     'Sheet Metal Boxes':[], 
+    #     'Junction Box (S)':[], 
+    #     'MS PLatform':[]
+    #     }
+    prediction_dfs={}
     for product in ['MS Brackets', 'Square Sheet Metal Junction Box', 'Sheet Metal Boxes', 'Junction Box (S)', 'MS PLatform']:#,'Square Sheet Metal Junction Box', 'Sheet Metal Boxes', 'Junction Box (S)', 'MS PLatform'
         
-        # print(f"*******************{product}********************")
+        print(f"*******************{product}********************")
         future_dates = pd.date_range(start=pd.Timestamp('2023-03-01 00:00:00') + pd.DateOffset(months=1), periods=12, freq='MS')
         future_dates = pd.DataFrame(future_dates, columns=['date'])
         # print("top_product_sales", top_product_sales)
@@ -209,9 +216,9 @@ def get_demand():
                 svr_pre_series = pd.Series(result_list, name="SVM Prediction")
                 final_predict_df['date'] = final_predict_df['date'].astype(str)
                 final_predict_df = final_predict_df.merge(svr_pre_series, left_index=True, right_index = True)
-                prediction_dfs.append(final_predict_df)
+                prediction_dfs[product] = final_predict_df
+                # prediction_dfs.append(final_predict_df)
                 # print("XDDDDDDDDDDDDDD")
-                # print(prediction_dfs)
     return prediction_dfs
 # models = {'Random Forest': RandomForestRegressor()}
 # store_sales = pd.read_csv("./fabapp/Datasets/top_products.csv")

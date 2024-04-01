@@ -1,12 +1,17 @@
 from collections import OrderedDict
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation, Salary, Employee
+from .models import CustomerRequirements, Inventory, Customer,Invoice, Order, Supplier,Quotation, Salary, Employee, Attendance
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+import json, math
 from fabapp.ml import get_prediction, get_demand
 import pandas as pd
+from django.shortcuts import render
+from django.http import JsonResponse
+from datetime import datetime, timedelta
+from django.db.models import Q
+from django.utils import timezone
 # Create your views here.
 
 #atattaetat
@@ -540,15 +545,15 @@ def list_revenue(request):
 
 def list_demand(request):
     final_predict_dfs = get_demand()
-    json_responses=[]
-    final_response ={}
-    for df in final_predict_dfs:
-        # print("Before to json df", df )
-        json_data = df.to_json(orient='records')
-        # put material name as a key in final response dict and value as the above variable named json_data
-        print("\nAfter json", json_data)
-        json_responses.append(json_data)
-    return JsonResponse(json_responses, safe=False)
+    json_responses={}
+    final_response = list()
+    for key, df in final_predict_dfs.items():
+        # print(df.dtype())
+
+        json_data = df.to_dict(orient='records')
+        json_responses[key]=json_data
+    final_response.append(json_responses)
+    return JsonResponse(final_response, safe=False)
     
 
 
@@ -561,7 +566,7 @@ def list_employees(request):
             'name':employee.name,
             'address':employee.address,
             'phone_number':employee.phone_number,
-            'date':employee.date,
+            'date_of_joining':employee.date_of_joining,
         })
     return JsonResponse(all_employees, safe=False)
 
@@ -636,7 +641,8 @@ def list_salary(request):
     for salary in salary_db:
         all_salary.append({
             'employee':salary.name.name,
-            'id':salary.id,
+            'salary_id':salary.id,
+            'employee_id':salary.name.id,
             'date':salary.date,
             'amount':salary.amount
         })
@@ -657,18 +663,22 @@ def create_salary(request):
         )
         return HttpResponse()
 
-def get_salary(request, pk):
-    salary_obj = Salary.objects.get(id=pk)
-    employee_obj = salary_obj.name
+def get_salary(request, employee_id):
+    employee_obj = Employee.objects.get(id=employee_id)
     employee_name = employee_obj.name
-    data = {
-        "id":pk,
-        "employee_name":employee_name,
-        "date":salary_obj.date,
-        "amount":salary_obj.amount
-    }
+    salary_objs = Salary.objects.filter(name=employee_obj)
+    print("These are salary objs",salary_objs)
+    all_data = []
+    for salary_obj in salary_objs:
+        all_data.append({
+            "salary_id":salary_obj.id,
+            "employee_id":employee_id,
+            "employee_name":employee_name,
+            "date":salary_obj.date,
+            "amount":salary_obj.amount
+        })
 
-    return JsonResponse(data) 
+    return JsonResponse(all_data, safe=False) 
 
 @csrf_exempt
 def update_salary(request):
@@ -704,3 +714,180 @@ def delete_salary(request, pk):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+
+
+
+def calculate_salary( employee_id):
+    # Retrieve the employee
+    try:
+        employee = Employee.objects.get(id=employee_id)
+    except Employee.DoesNotExist:
+        return JsonResponse({'error': 'Employee does not exist'})
+
+    # Retrieve today's attendance record for the employee
+    today = datetime.now().date()
+    try:
+        attendance_today = Attendance.objects.get(employee=employee, check_in__date=today)
+    except Attendance.DoesNotExist:
+        return JsonResponse({'error': 'Employee has not checked in today'})
+
+    # Check if employee has checked out
+    if attendance_today.check_out is None:
+        return JsonResponse({'error': 'Employee has not checked out yet'})
+
+    # Calculate total hours worked for the day
+    hours_worked = (attendance_today.check_out - attendance_today.check_in).total_seconds() / 3600
+
+    # Calculate years of experience
+    years_of_experience = (timezone.now().date() - employee.date_of_joining) // timedelta(days=365)
+    print("This is the years of experience", years_of_experience)
+    # Set default salary based on years of experience
+    if years_of_experience >= 5:
+        default_salary = 200
+    else:
+        default_salary = 100
+
+    # Assuming salary is constant for all employees
+    daily_salary = default_salary
+
+    # Calculate salary for the day
+    salary = daily_salary
+    if hours_worked < 8:
+        salary /= 2
+
+    # Check if a Salary instance already exists for today's date and the employee
+    existing_salary = Salary.objects.filter(Q(name=employee) & Q(date=today)).first()
+
+    if existing_salary:
+        return JsonResponse({'error': 'Salary already exists for today'})
+
+    # Create a new salary instance
+    Salary.objects.create(name=employee, amount=salary, date=today)
+
+    return JsonResponse({'employee': employee.name, 'hours_worked': hours_worked, 'salary': salary})
+
+
+
+
+@csrf_exempt
+def mark_attendance(request, employee_id):
+    # list of employees will be passed later rather than a single employee's ID so remember that
+
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        action = data.get('action')
+        if action not in ['check_in', 'check_out']:
+            return JsonResponse({'error': 'Invalid action'})
+
+        try:
+            employee = Employee.objects.get(id=employee_id)
+        except Employee.DoesNotExist:
+            return JsonResponse({'error': 'Employee does not exist'})
+
+        # Retrieve today's attendance record for the employee
+        today = datetime.now().date()
+        try:
+            attendance_today = Attendance.objects.get(employee=employee, check_in__date=today)
+        except Attendance.DoesNotExist:
+            # If the employee has not checked in today, create a new attendance record for check-in
+            if action == 'check_in':
+                Attendance.objects.create(employee=employee)
+                return JsonResponse({'success': 'Checked in successfully'})
+            else:
+                return JsonResponse({'error': 'Employee has not checked in today'})
+
+        # If the employee has already checked out today, return error
+        if action == 'check_in' and attendance_today.check_out is not None:
+            return JsonResponse({'error': 'Employee has already checked out for today'})
+
+        # Update check-out time if action is check_out
+        if action == 'check_out':
+            attendance_today.check_out = timezone.now()
+            print("This is checkin time",attendance_today.check_in)
+            print("This is checkout time",attendance_today.check_out)
+            attendance_today.save()
+            calculate_salary(employee_id=employee_id)
+            return JsonResponse({'success': 'Checked out successfully'})
+
+        return JsonResponse({'success': 'Already checked in today'})
+    
+    else:
+        print("Invalid request method")
+
+
+
+
+def list_attendance(request):
+    attendance_db = Attendance.objects.all()
+    all_attendance = list()
+    for attendance in attendance_db:
+        all_attendance.append({
+            'attendance_id': attendance.id,
+            'employee':attendance.employee.name,
+            'check_in':attendance.check_in,
+            'check_out':attendance.check_out
+        })
+    
+    return JsonResponse(all_attendance, safe=False)
+
+
+def get_attendance(request, employee_id):
+    employee_obj = Employee.objects.get(id=employee_id)
+    employee_name = employee_obj.name
+    attendance_objs = Attendance.objects.filter(employee=employee_obj)
+    all_data = []
+    for attendance_obj in attendance_objs:
+        all_data.append({
+            "attendance_id":attendance_obj.id,
+            "employee_id":employee_id,
+            "employee_name":employee_name,
+            "check_in":attendance_obj.check_in,
+            "check_out":attendance_obj.check_out
+        })
+
+    return JsonResponse(all_data, safe=False)
+
+
+
+def give_estimated_materials(request):
+    raw_materials_prices= {
+    "Junction Box (S)" : 450, 
+    "MS Brackets" : 150, 
+    "MS PLatform" : 1250, 
+    "Sheet Metal Boxes" : 100, 
+    "Square Sheet Metal Junction Box" : 1000
+    }
+
+    HOLDING_COST = 100
+
+    def calculate_eoq(H,D,S):
+        Q = math.sqrt(2*D*S /H)
+        print("Mai KYU HU",Q)
+        return Q
+    
+    response = list_demand(request)
+    json_data_bytes = response.content
+    json_data_str = json_data_bytes.decode('utf-8')
+    data = json.loads(json_data_str)
+    # print("This is json_data", data[0]['MS Brackets'])
+
+    Junction_Box_pred = data[0]['Junction Box (S)'][0]['SVM Prediction']
+    MS_Brackets_pred = data[0]['MS Brackets'][0]['SVM Prediction']
+    MS_PLatform_pred = data[0]['MS PLatform'][0]['SVM Prediction']
+    Sheet_Metal_Boxes_pred = data[0]['Sheet Metal Boxes'][0]['SVM Prediction']
+    Square_Sheet_Metal_Junction_Box_pred = data[0]['Square Sheet Metal Junction Box'][0]['SVM Prediction']
+    print("I am Sheet metal boxes pred", Sheet_Metal_Boxes_pred)
+    
+    estimated_units ={
+    "MS_Brackets": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_Brackets_pred,S=raw_materials_prices['MS Brackets'])),
+    "Square_Sheet_Metal_Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Square_Sheet_Metal_Junction_Box_pred,S=raw_materials_prices['Square Sheet Metal Junction Box'])),
+    "Sheet_Metal_Boxes": math.ceil(calculate_eoq(H=HOLDING_COST,D=Sheet_Metal_Boxes_pred,S=raw_materials_prices['Sheet Metal Boxes'])),
+    "Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Junction_Box_pred,S=raw_materials_prices['Junction Box (S)'])),
+    "MS_PLatform": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_PLatform_pred,S=raw_materials_prices['MS PLatform'])),
+
+    }
+    print("I am the life", estimated_units)
+    final_data= list()
+    final_data.append(estimated_units)
+    return JsonResponse(final_data, safe=False)

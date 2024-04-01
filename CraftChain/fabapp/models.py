@@ -148,7 +148,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
-    date = models.DateField(auto_now_add=True)
+    date_of_joining = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -162,3 +162,14 @@ class Salary(models.Model):
 
     def __str__(self):
         return self.name.name
+
+    
+
+class Attendance(models.Model):
+    id = models.AutoField(primary_key=True)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    check_in = models.DateTimeField(auto_now_add=True)
+    check_out = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.employee.name} - {self.check_in.strftime('%Y-%m-%d %H:%M:%S')}"

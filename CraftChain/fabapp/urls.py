@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
+from . import views, eoq
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.apitest, name='home'),
     path('Customer_req', views.Customer_req, name="Customer_req"),
     path('customer/<str:pk>', views.customer_page, name='customer'),
     # path('delete_order/<str:pk>', views.delete_order, name="order"),
@@ -44,12 +44,14 @@ urlpatterns = [
     path('update_employees', views.update_employees,name='update_employees'),
     path('get_employees/<int:pk>/', views.get_employees,name='get_employees'),
     path('delete_employees/<int:pk>/', views.delete_employees,name='delete_employees'),
-
     path('list_salary', views.list_salary,name='list_salary'),
-    path('create_salary', views.create_salary,name='create_salary'),
-    path('update_salary', views.update_salary,name='update_salary'),
-    path('get_salary/<int:pk>/', views.get_salary,name='get_salary'),
-    path('delete_salary/<int:pk>/', views.delete_salary,name='delete_salary'),
-    
-
+    path('create_salary', views.create_salary,name='create_salary'),# THIS API WILL BE DISCARDED
+    path('update_salary', views.update_salary,name='update_salary'),# THIS API WILL BE DISCARDED
+    path('get_salary/<int:employee_id>/', views.get_salary,name='get_salary'),
+    path('delete_salary/<int:pk>/', views.delete_salary,name='delete_salary'),# THIS API WILL BE DISCARDED
+    path('calculate_salary/<int:employee_id>/', views.calculate_salary,name='calculate_salary'),
+    path('mark_attendance/<int:employee_id>/', views.mark_attendance,name='mark_attendance'),
+    path('list_attendance', views.list_attendance,name='list_attendance'),
+    path('get_attendance/<int:employee_id>/', views.get_attendance,name='get_attendance'),
+    path('give_estimated_materials', views.give_estimated_materials,name='give_estimated_materials'),
 ]
