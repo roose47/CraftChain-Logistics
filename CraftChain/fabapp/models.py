@@ -1,7 +1,7 @@
 from django.db import models
 # from django.contrib.auth.models import User  # Optional, for user authentication
 from django.utils import timezone
-import uuid
+from datetime import datetime
 # Create your models here.
 
 
@@ -84,12 +84,16 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     order_name = models.CharField(max_length=30, null=True)
     order_id = models.AutoField(primary_key=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     status_choices = (
         ('Finished', 'Finished'),
         ('In Progress', 'In Progress')
     )
     order_status = models.CharField(max_length=15, choices = status_choices, default='In Progress')
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.date = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.order_name
@@ -100,7 +104,7 @@ class Invoice(models.Model):
     invoice_amount = models.DecimalField(max_digits=10, decimal_places=2)
     address = models.CharField(max_length=150, null=True)
     customer_name = models.CharField(max_length=100, blank=True)  # Allow blank since it will be auto-populated
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     def save(self, *args, **kwargs):
         # Automatically fetch the customer name from the associated order
         self.customer_name = self.order.customer.name
@@ -112,6 +116,10 @@ class Invoice(models.Model):
     )
     invoice_status = models.CharField(max_length=15, choices = status_choices, default='Unpaid')
 
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.date = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
     def __str__(self):
         return f"{self.order.customer.name}"
     
@@ -131,13 +139,17 @@ class Quotation(models.Model):
     id = models.AutoField(primary_key=True)
     quotation_name = models.CharField(max_length=20, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     status_choices = (
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
         ('Under Review', 'Under Review')
     )
     quotation_status = models.CharField(max_length=15, choices = status_choices, default='Under Review')
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.date = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.quotation_name
@@ -148,7 +160,11 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
-    date_of_joining = models.DateField(auto_now_add=True)
+    date_of_joining = models.DateField()
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.date_of_joining = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -158,18 +174,26 @@ class Salary(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.CharField(max_length=7, blank=True, null=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.date = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name.name
+        return f"{self.name.name} - {self.date}"
 
     
 
 class Attendance(models.Model):
     id = models.AutoField(primary_key=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    check_in = models.DateTimeField(auto_now_add=True)
+    check_in = models.DateTimeField()
     check_out = models.DateTimeField(blank=True, null=True)
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the instance is not yet saved in the database
+            self.check_in = datetime.now()  # Set check_in to current datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.employee.name} - {self.check_in.strftime('%Y-%m-%d %H:%M:%S')}"

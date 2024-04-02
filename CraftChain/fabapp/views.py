@@ -740,7 +740,7 @@ def calculate_salary( employee_id):
     hours_worked = (attendance_today.check_out - attendance_today.check_in).total_seconds() / 3600
 
     # Calculate years of experience
-    years_of_experience = (timezone.now().date() - employee.date_of_joining) // timedelta(days=365)
+    years_of_experience = (datetime.now().date() - employee.date_of_joining) // timedelta(days=365)
     print("This is the years of experience", years_of_experience)
     # Set default salary based on years of experience
     if years_of_experience >= 5:
@@ -771,49 +771,56 @@ def calculate_salary( employee_id):
 
 
 @csrf_exempt
-def mark_attendance(request, employee_id):
+def mark_attendance(request):
     # list of employees will be passed later rather than a single employee's ID so remember that
 
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         action = data.get('action')
+        employee_ids = data.get('employee_ids', [])
         if action not in ['check_in', 'check_out']:
-            return JsonResponse({'error': 'Invalid action'})
+            print( 'Invalid action')
+        for employee_id in employee_ids:
+            try:
+                employee = Employee.objects.get(id=employee_id)
+            except Employee.DoesNotExist:
+                print ('Employee does not exist')
 
-        try:
-            employee = Employee.objects.get(id=employee_id)
-        except Employee.DoesNotExist:
-            return JsonResponse({'error': 'Employee does not exist'})
+            # Retrieve today's attendance record for the employee
+            today = datetime.now().date()
+            try:
+                attendance_today = Attendance.objects.get(employee=employee, check_in__date=today)
+                    # Update check-out time if action is check_out
+                if action == 'check_in':
+                    print("Bro has already checked in", employee.name)
+                if action == 'check_out' and attendance_today.check_out is None:
+                    print("This is today when checkout is clicked", today)
+                    attendance_today.check_out = datetime.now()
+                    print("This is checkin time",attendance_today.check_in)
+                    print("This is checkout time",attendance_today.check_out)
+                    attendance_today.save()
+                    calculate_salary(employee_id=employee_id)
+                    print('Checked out successfully')
+                elif action == 'check_out' and attendance_today.check_out is not None:
+                    print("Bro has checkout already", employee.name)
+            except Attendance.DoesNotExist:
+                # If the employee has not checked in today, create a new attendance record for check-in
+                if action == 'check_in':
+                    print("This is today when checkin is clicked", today)
+                    Attendance.objects.create(employee=employee)
+                    print( 'Checked in successfully')
+                elif action == 'check_out':
+                    print('Employee has not checked in today')
+            # If the employee has already checked out today, return error
+            # if action == 'check_in' and attendance_today.check_out is not None:
+            #     print( 'Employee has already checked out for today')
 
-        # Retrieve today's attendance record for the employee
-        today = datetime.now().date()
-        try:
-            attendance_today = Attendance.objects.get(employee=employee, check_in__date=today)
-        except Attendance.DoesNotExist:
-            # If the employee has not checked in today, create a new attendance record for check-in
-            if action == 'check_in':
-                Attendance.objects.create(employee=employee)
-                return JsonResponse({'success': 'Checked in successfully'})
-            else:
-                return JsonResponse({'error': 'Employee has not checked in today'})
-
-        # If the employee has already checked out today, return error
-        if action == 'check_in' and attendance_today.check_out is not None:
-            return JsonResponse({'error': 'Employee has already checked out for today'})
-
-        # Update check-out time if action is check_out
-        if action == 'check_out':
-            attendance_today.check_out = timezone.now()
-            print("This is checkin time",attendance_today.check_in)
-            print("This is checkout time",attendance_today.check_out)
-            attendance_today.save()
-            calculate_salary(employee_id=employee_id)
-            return JsonResponse({'success': 'Checked out successfully'})
-
-        return JsonResponse({'success': 'Already checked in today'})
+            
     
     else:
         print("Invalid request method")
+    
+    return HttpResponse()
 
 
 
