@@ -793,6 +793,7 @@ def mark_attendance(request):
                     # Update check-out time if action is check_out
                 if action == 'check_in':
                     print("Bro has already checked in", employee.name)
+                    break
                 if action == 'check_out' and attendance_today.check_out is None:
                     print("This is today when checkout is clicked", today)
                     attendance_today.check_out = datetime.now()
@@ -800,7 +801,7 @@ def mark_attendance(request):
                     print("This is checkout time",attendance_today.check_out)
                     attendance_today.save()
                     calculate_salary(employee_id=employee_id)
-                    print('Checked out successfully')
+                    print('Checked out successfully', employee.name)
                 elif action == 'check_out' and attendance_today.check_out is not None:
                     print("Bro has checkout already", employee.name)
             except Attendance.DoesNotExist:
@@ -808,7 +809,7 @@ def mark_attendance(request):
                 if action == 'check_in':
                     print("This is today when checkin is clicked", today)
                     Attendance.objects.create(employee=employee)
-                    print( 'Checked in successfully')
+                    print( 'Checked in successfully', employee.name)
                 elif action == 'check_out':
                     print('Employee has not checked in today')
             # If the employee has already checked out today, return error

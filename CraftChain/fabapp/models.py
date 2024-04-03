@@ -157,8 +157,8 @@ class Quotation(models.Model):
 
 class Employee(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, null=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     date_of_joining = models.DateField()
     def save(self, *args, **kwargs):
