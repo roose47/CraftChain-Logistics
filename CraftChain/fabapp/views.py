@@ -887,15 +887,40 @@ def give_estimated_materials(request):
     Square_Sheet_Metal_Junction_Box_pred = data[0]['Square Sheet Metal Junction Box'][0]['SVM Prediction']
     print("I am Sheet metal boxes pred", Sheet_Metal_Boxes_pred)
     
-    estimated_units ={
-    "MS_Brackets": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_Brackets_pred,S=raw_materials_prices['MS Brackets'])),
-    "Square_Sheet_Metal_Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Square_Sheet_Metal_Junction_Box_pred,S=raw_materials_prices['Square Sheet Metal Junction Box'])),
-    "Sheet_Metal_Boxes": math.ceil(calculate_eoq(H=HOLDING_COST,D=Sheet_Metal_Boxes_pred,S=raw_materials_prices['Sheet Metal Boxes'])),
-    "Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Junction_Box_pred,S=raw_materials_prices['Junction Box (S)'])),
-    "MS_PLatform": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_PLatform_pred,S=raw_materials_prices['MS PLatform'])),
+    estimated_units =[
+        {
+            "mat_id":"1",
+            "mat_name":"MS_Brackets",
+            "units": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_Brackets_pred,S=raw_materials_prices['MS Brackets'])),
+        },
+    # "MS_Brackets": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_Brackets_pred,S=raw_materials_prices['MS Brackets'])),
+        {
+            "mat_id":"2",
+            "mat_name":"Square_Sheet_Metal_Junction_Box",
+            "units": math.ceil(calculate_eoq(H=HOLDING_COST,D=Square_Sheet_Metal_Junction_Box_pred,S=raw_materials_prices['Square Sheet Metal Junction Box'])),
+        },
+    # "Square_Sheet_Metal_Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Square_Sheet_Metal_Junction_Box_pred,S=raw_materials_prices['Square Sheet Metal Junction Box'])),
+        {
+            "mat_id":"3",
+            "mat_name":"Sheet_Metal_Boxes",
+            "units": math.ceil(calculate_eoq(H=HOLDING_COST,D=Sheet_Metal_Boxes_pred,S=raw_materials_prices['Sheet Metal Boxes'])),
+        },
+        # "Sheet_Metal_Boxes": math.ceil(calculate_eoq(H=HOLDING_COST,D=Sheet_Metal_Boxes_pred,S=raw_materials_prices['Sheet Metal Boxes'])),
+        {
+            "mat_id":"4",
+            "mat_name":"Junction_Box",
+            "units": math.ceil(calculate_eoq(H=HOLDING_COST,D=Junction_Box_pred,S=raw_materials_prices['Junction Box (S)'])),
+        },
+        # "Junction_Box": math.ceil(calculate_eoq(H=HOLDING_COST,D=Junction_Box_pred,S=raw_materials_prices['Junction Box (S)'])),
+        {
+            "mat_id":"5",
+            "mat_name":"MS_PLatform",
+            "units": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_PLatform_pred,S=raw_materials_prices['MS PLatform'])),
+        }
+    # "MS_PLatform": math.ceil(calculate_eoq(H=HOLDING_COST,D=MS_PLatform_pred,S=raw_materials_prices['MS PLatform'])),
 
-    }
+    ]
     print("I am the life", estimated_units)
-    final_data= list()
-    final_data.append(estimated_units)
-    return JsonResponse(final_data, safe=False)
+    # final_data= list()
+    # final_data.append(estimated_units)
+    return JsonResponse(estimated_units, safe=False)
