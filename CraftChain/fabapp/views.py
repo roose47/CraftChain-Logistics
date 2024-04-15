@@ -538,7 +538,7 @@ def list_revenue(request):
     # Convert 'date' column to datetime format
     final_predict_df['date'] = pd.to_datetime(final_predict_df['date'])
     # Extract month name from the 'date' column and assign it to a new column 'month'
-    final_predict_df['month'] = final_predict_df['date'].dt.strftime('%b')
+    final_predict_df['month'] = final_predict_df['date'].dt.strftime('%b-%y')
     print(final_predict_df)
     json_data = final_predict_df.to_dict(orient='records')
     json_data = json_data[0:5]
