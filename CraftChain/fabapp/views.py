@@ -681,6 +681,73 @@ def get_salary(request, employee_id):
 
     return JsonResponse(all_data, safe=False) 
 
+from django.db.models import Sum
+@csrf_exempt
+def get_monthly_salary(request,employee_id,month):
+# if request.method == 'POST':
+#     print("I am post methjod")
+#     data = json.loads(request.body.decode('utf-8'))
+#     print(data)
+#     employee_id = data.get('employee_id')
+#     month= data.get('month')
+    # Assuming your Salary model has fields 'employee_name', 'date', and 'amount'
+    # 'date' field represents the date of the salary
+    # 'amount' field represents the salary amount
+    month_mapping = {
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    }
+    employee_obj = Employee.objects.get(id=employee_id)
+    # Filter salaries by employee name and month
+    monthly_salaries = Salary.objects.filter(
+        name=employee_obj,
+        date__month=month_mapping[month]
+    )
+
+    # Calculate the sum of salaries for the month
+    total_salary_for_month = monthly_salaries.aggregate(total_salary=Sum('amount'))['total_salary']
+    final_output = list()
+    data = {
+        "employee_name": employee_obj.name,
+        "month": month,
+        "salary":total_salary_for_month
+    }
+    final_output.append(data)
+    # Return the total salary as JSON response
+    return JsonResponse(final_output , safe=False)
+
+
+from django.db.models import Sum
+@csrf_exempt
+def get_annual_salary(request,employee_id):
+# if request.method == 'POST':
+#     print("I am post methjod")
+#     data = json.loads(request.body.decode('utf-8'))
+#     print(data)
+#     employee_id = data.get('employee_id')
+#     month= data.get('month')
+    # Assuming your Salary model has fields 'employee_name', 'date', and 'amount'
+    # 'date' field represents the date of the salary
+    # 'amount' field represents the salary amount
+    employee_obj = Employee.objects.get(id=employee_id)
+    # Filter salaries by employee name and month
+    employee_salaries = Salary.objects.filter(
+        name=employee_obj
+    )
+
+    # Calculate the sum of salaries for the month
+    annual_salary = employee_salaries.aggregate(total_salary=Sum('amount'))['total_salary']
+    final_output = list()
+    data = {
+        "employee_name": employee_obj.name,
+        "annual_salary":annual_salary
+    }
+    final_output.append(data)
+    # Return the total salary as JSON response
+    return JsonResponse(final_output , safe=False)
+
+
+
 @csrf_exempt
 def update_salary(request):
     print("update order was called")
