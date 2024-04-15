@@ -541,6 +541,7 @@ def list_revenue(request):
     final_predict_df['month'] = final_predict_df['date'].dt.strftime('%b')
     print(final_predict_df)
     json_data = final_predict_df.to_dict(orient='records')
+    json_data = json_data[0:5]
     return JsonResponse(json_data, safe=False)
 
 def list_demand(request):
