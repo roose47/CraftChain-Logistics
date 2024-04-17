@@ -21,6 +21,7 @@ urlpatterns = [
     path('get_invoice/<int:pk>/', views.get_invoice,name='get_invoice'),
     path('update_invoice', views.update_invoice,name='update_invoice'),
     path('delete_invoice/<int:pk>/', views.delete_invoice,name='delete_invoice'),
+    path('download-invoice/<int:order_id>/', views.download_invoice_pdf, name='download_invoice_pdf'),
     path('list_suppliers', views.list_suppliers,name='list_suppliers'),
     path('delete_supplier/<int:pk>/', views.delete_supplier,name='delete_supplier'),
     path('create_suppliers', views.create_suppliers,name='create_suppliers'),

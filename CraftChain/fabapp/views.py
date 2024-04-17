@@ -12,9 +12,54 @@ from django.http import JsonResponse
 from datetime import datetime, timedelta
 from django.db.models import Q
 from django.utils import timezone
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 # Create your views here.
 
-#atattaetat
+def download_invoice_pdf(request, order_id):
+    # Fetch invoice data from your database or any other source
+    invoice_data = get_invoice_data(order_id)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="invoice_{invoice_data["Order_name"]}.pdf"'
+
+    # Create a PDF document
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+
+    styles = getSampleStyleSheet ()
+    # Add invoice data to the PDF
+    elements.append(Paragraph("Invoice", styles['Heading1']))
+    elements.append(Paragraph(f"Company Name: Kondoth Fabrications", styles['Heading2']))
+    elements.append(Paragraph(f"Order_name: {invoice_data['Order_name']}", styles["Normal"]))
+    elements.append(Paragraph(f"Invoice_amount: {invoice_data['Invoice_amount']}", styles["Normal"]))
+    elements.append(Paragraph(f"Address: {invoice_data['Address']}", styles["Normal"]))
+    elements.append(Paragraph(f"Customer_name: {invoice_data['Customer_name']}", styles["Normal"]))
+    elements.append(Paragraph(f"Date: {invoice_data['Date']}", styles["Normal"]))
+    # Add other fields from invoice_data to the PDF
+    print("This is elements var ", elements )
+    # Build the PDF document
+    doc.build(elements)
+    return response
+
+def get_invoice_data(order_id):
+    # Fetch and return invoice data from your database or any other source
+    order_obj = Order.objects.get(order_id=order_id)
+    invoice =Invoice.objects.get(order=order_obj)
+    # invoice = Invoice.objects.get(id=order_id)
+    data ={
+        "Order_name": invoice.order.order_name,
+        "Invoice_amount": invoice.invoice_amount,
+        "Address": invoice.address,
+        "Customer_name": invoice.customer_name,
+        "Date": invoice.date
+        }
+    return data
+
+
 def home(request):
     all_orders = CustomerRequirements.objects.all()
     total_orders = all_orders.count()
