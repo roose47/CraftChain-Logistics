@@ -105,10 +105,10 @@ class Invoice(models.Model):
     address = models.CharField(max_length=150, null=True)
     customer_name = models.CharField(max_length=100, blank=True)  # Allow blank since it will be auto-populated
     date = models.DateField()
-    def save(self, *args, **kwargs):
-        # Automatically fetch the customer name from the associated order
-        self.customer_name = self.order.customer.name
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Automatically fetch the customer name from the associated order
+    #     self.customer_name = self.order.customer.name
+    #     super().save(*args, **kwargs)
 
     status_choices = (
         ('Paid', 'Paid'),
@@ -117,8 +117,9 @@ class Invoice(models.Model):
     invoice_status = models.CharField(max_length=15, choices = status_choices, default='Unpaid')
 
     def save(self, *args, **kwargs):
-        if not self.pk:  # If the instance is not yet saved in the database
-            self.date = datetime.now()  # Set check_in to current datetime
+        # if not self.pk:  # If the instance is not yet saved in the database
+        self.date = datetime.now()  # Set check_in to current datetime
+        self.customer_name = self.order.customer.name
         super().save(*args, **kwargs)
     def __str__(self):
         return f"{self.order.customer.name}"
