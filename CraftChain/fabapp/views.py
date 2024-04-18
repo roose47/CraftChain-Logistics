@@ -15,7 +15,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph,  Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 # Create your views here.
 
@@ -33,12 +33,21 @@ def download_invoice_pdf(request, order_id):
     styles = getSampleStyleSheet ()
     # Add invoice data to the PDF
     elements.append(Paragraph("Invoice", styles['Heading1']))
+    elements.append(Spacer(1, 12))
     elements.append(Paragraph(f"Company Name: Kondoth Fabrications", styles['Heading2']))
+    elements.append(Spacer(1, 10))
+    elements.append(Paragraph(f"Order_ID: {order_id}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     elements.append(Paragraph(f"Order_name: {invoice_data['Order_name']}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     elements.append(Paragraph(f"Invoice_amount: {invoice_data['Invoice_amount']}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     elements.append(Paragraph(f"Address: {invoice_data['Address']}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     elements.append(Paragraph(f"Customer_name: {invoice_data['Customer_name']}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     elements.append(Paragraph(f"Date: {invoice_data['Date']}", styles["Normal"]))
+    elements.append(Spacer(1, 5))
     # Add other fields from invoice_data to the PDF
     print("This is elements var ", elements )
     # Build the PDF document
