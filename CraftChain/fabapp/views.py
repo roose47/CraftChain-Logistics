@@ -19,6 +19,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 # Create your views here.
 
+@csrf_exempt
 def download_invoice_pdf(request, order_id):
     # Fetch invoice data from your database or any other source
     invoice_data = get_invoice_data(order_id)
