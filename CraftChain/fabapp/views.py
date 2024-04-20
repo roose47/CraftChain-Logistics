@@ -998,10 +998,26 @@ def get_attendance(request, employee_id):
     attendance_objs = Attendance.objects.filter(employee=employee_obj)
     all_data = []
     for attendance_obj in attendance_objs:
+
+        check_in = str(attendance_obj.check_in)
+        # Parse the timestamp string into a datetime object
+        timestamp = datetime.fromisoformat(check_in.replace('Z', '+00:00'))
+        # Convert the datetime object to the desired time format
+        check_in_time = timestamp.strftime("%I:%M %p")
+
+        check_out = str(attendance_obj.check_out)
+        # Parse the timestamp string into a datetime object
+        timestamp = datetime.fromisoformat(check_out.replace('Z', '+00:00'))
+        # Convert the datetime object to the desired time format
+        check_out_time = timestamp.strftime("%I:%M %p")
+
         all_data.append({
-            "attendance_id":attendance_obj.id,
-            "employee_id":employee_id,
+            # "attendance_id":attendance_obj.id,
+            # "employee_id":employee_id,
             "employee_name":employee_name,
+            "date":attendance_obj.check_in.date(),
+            "check_in_time": check_in_time,
+            "check_out_time": check_out_time,
             "check_in":attendance_obj.check_in,
             "check_out":attendance_obj.check_out
         })
