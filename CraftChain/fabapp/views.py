@@ -801,6 +801,35 @@ def get_annual_salary(request,employee_id):
     # Return the total salary as JSON response
     return JsonResponse(final_output , safe=False)
 
+from calendar import month_abbr
+def get_monthly_salary_by_year(request, employee_id, year):
+    employee_obj = Employee.objects.get(id=employee_id)
+    yearly_data = []
+
+    # Iterate over all months in the year
+    for month_number in range(1, 13):
+        # Filter salaries by employee name, year, and month
+        monthly_salaries = Salary.objects.filter(
+            name=employee_obj,
+            date__year=year,
+            date__month=month_number
+        )
+
+        # Calculate the sum of salaries for the month
+        total_salary_for_month = monthly_salaries.aggregate(total_salary=Sum('amount'))['total_salary']
+
+        # Set total_salary_for_month to 0 if it's None (no records found for the month)
+        if total_salary_for_month is None:
+            total_salary_for_month = 0
+
+        # Append the data for the month to the yearly_data list
+        yearly_data.append({
+            'month': month_abbr[month_number],
+            'salary': total_salary_for_month
+        })
+
+    # Return the yearly data as JSON response
+    return JsonResponse(yearly_data, safe=False)
 
 
 @csrf_exempt

@@ -50,6 +50,7 @@ urlpatterns = [
     path('update_salary', views.update_salary,name='update_salary'),# THIS API WILL BE DISCARDED
     path('get_salary/<int:employee_id>/', views.get_salary,name='get_salary'),
     path('get_monthly_salary/<int:employee_id>/<str:month>', views.get_monthly_salary,name='get_monthly_salary'),
+    path('get_monthly_salary_by_year/<int:employee_id>/<str:year>', views.get_monthly_salary_by_year,name='get_monthly_salary_by_year'),
     path('get_annual_salary/<int:employee_id>/', views.get_annual_salary,name='get_annual_salary'),
     path('delete_salary/<int:pk>/', views.delete_salary,name='delete_salary'),# THIS API WILL BE DISCARDED
     path('calculate_salary/<int:employee_id>/', views.calculate_salary,name='calculate_salary'),
