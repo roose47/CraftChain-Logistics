@@ -239,17 +239,21 @@ def update_customer(request):
 #     else:
 #         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
-
 def list_orders(request):
-    order_db = Order.objects.all()
-    all_orders = list()
+    order_status = request.GET.get('status', None)
+    if order_status:
+        order_db = Order.objects.filter(order_status=order_status)
+    else:
+        order_db = Order.objects.all()
+
+    all_orders = []
     for order in order_db:
         all_orders.append({
-            'customer':order.customer.name,
-            'order_name':order.order_name,
-            'id':order.order_id,
-            'date':order.date,
-            'order_status':order.order_status
+            'customer': order.customer.name,
+            'order_name': order.order_name,
+            'id': order.order_id,
+            'date': order.date,
+            'order_status': order.order_status
         })
 
     return JsonResponse(all_orders, safe=False)
