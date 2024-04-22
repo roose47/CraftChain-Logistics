@@ -17,6 +17,7 @@ urlpatterns = [
     path('get_customer/<int:pk>/', views.get_customer,name='get_customer'),
     # path('delete_customer', views.delete_customer,name='delete_customer'),
     path('list_invoices', views.list_invoices,name='list_invoices'),
+    path('top_5_latest_invoices', views.top_5_latest_invoices,name='top_5_latest_invoices'),
     path('create_invoice', views.create_invoice,name='create_invoice'),
     path('get_invoice/<int:pk>/', views.get_invoice,name='get_invoice'),
     path('update_invoice', views.update_invoice,name='update_invoice'),
@@ -58,4 +59,5 @@ urlpatterns = [
     path('list_attendance', views.list_attendance,name='list_attendance'),
     path('get_attendance/<int:employee_id>/', views.get_attendance,name='get_attendance'),
     path('give_estimated_materials', views.give_estimated_materials,name='give_estimated_materials'),
+    path('dashboard_api', views.dashboard_api,name='dashboard_api'),
 ]

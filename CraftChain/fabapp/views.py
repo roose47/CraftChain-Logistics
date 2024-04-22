@@ -19,6 +19,24 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet
 # Create your views here.
 
+def dashboard_api(request):
+    all_customer_objs = Customer.objects.all()
+    total_invoices = Invoice.objects.all()
+    paid_invoices = Invoice.objects.filter(invoice_status= "Paid").aggregate(total_invoices=Sum('invoice_amount'))['total_invoices']
+    unpaid_invoices = Invoice.objects.filter(invoice_status= "Unpaid").aggregate(total_invoices=Sum('invoice_amount'))['total_invoices']
+    if unpaid_invoices is None:
+        unpaid_invoices = "All Paid"
+    final_data = list()
+    data = {
+        "number_of_customers": len(all_customer_objs),
+        "number_of_invoices":len(total_invoices),
+        "paid_invoices": f"₹ {paid_invoices}",
+        "unpaid_invoices":f"₹ {unpaid_invoices}",
+         }
+    final_data.append(data)
+    return JsonResponse(final_data, safe=False)
+
+
 def download_invoice_pdf(request, order_id):
     # Fetch invoice data from your database or any other source
     invoice_data = get_invoice_data(order_id)
@@ -67,6 +85,26 @@ def get_invoice_data(order_id):
         "Date": invoice.date
         }
     return data
+
+
+def top_5_latest_invoices(request):
+    # Fetch the top 5 latest invoices ordered by creation date
+    latest_invoices = Invoice.objects.filter(invoice_status='Paid').order_by('date')[:5]
+    final_data = list()
+    for invoice in latest_invoices:
+        customer_name = invoice.customer_name
+        cust_obj =Customer.objects.get(name=customer_name)
+
+        data ={
+            "customer_id":cust_obj.id,
+            "order_id":invoice.order.order_id,
+            "customer_name":customer_name,
+            "amount":invoice.invoice_amount,
+        }
+        final_data.append(data)
+    
+    # Render a template with the fetched invoices
+    return JsonResponse(final_data, safe=False)
 
 
 def home(request):
