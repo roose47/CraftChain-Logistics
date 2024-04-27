@@ -89,7 +89,7 @@ def get_invoice_data(order_id):
 
 def top_5_latest_invoices(request):
     # Fetch the top 5 latest invoices ordered by creation date
-    latest_invoices = Invoice.objects.filter(invoice_status='Paid').order_by('date')[:5]
+    latest_invoices = Invoice.objects.filter(invoice_status='Unpaid').order_by('date')[:5]
     final_data = list()
     for invoice in latest_invoices:
         customer_name = invoice.customer_name
