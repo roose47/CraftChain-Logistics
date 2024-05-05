@@ -94,6 +94,7 @@ def top_5_latest_invoices(request):
     for invoice in latest_invoices:
         customer_name = invoice.customer_name
         cust_obj =Customer.objects.get(name=customer_name)
+        print("This is name of custeoer", customer_name)
 
         data ={
             "customer_id":cust_obj.id,
@@ -170,6 +171,7 @@ def update_material(request):
         material_id = data.get('material_id')
         material_name=data.get('material_name')
         material_amt=data.get('material_amount')
+        print(material_amt)
         material_obj=Inventory.objects.get(id=material_id)
         material_obj.material_name=material_name
         material_obj.material_amt=material_amt
